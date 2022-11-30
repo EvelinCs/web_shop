@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="nav">
+    <app-menu></app-menu>
+    <a  mat-flat-button color="primary" [routerLink]="['/home']">My Application</a>
+    <div class="right">
+    <button  mat-icon-button><mat-icon>search</mat-icon></button>
+    <button  mat-icon-button><mat-icon>favorite</mat-icon></button>
+    <button  mat-icon-button><mat-icon>shopping_cart</mat-icon></button>
+    <app-account-menu></app-account-menu>
+    <button  mat-flat-button color="primary" [routerLink]="['/login']" class="vcenter">Login</button>
+    <button  mat-flat-button color="primary" [routerLink]="['/register']" class="vcenter">Register</button>
+</div>
+</mat-toolbar>

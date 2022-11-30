@@ -1,0 +1,16 @@
+<button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="dogMenu">Dog</button>
+    <button mat-menu-item [matMenuTriggerFor]="catMenu">Cat</button>
+</mat-menu>
+
+<mat-menu #dogMenu="matMenu">
+    <button mat-menu-item >Food</button>
+    <button mat-menu-item >Other</button>
+</mat-menu>
+
+<mat-menu #catMenu="matMenu">
+    <button mat-menu-item >Food</button>
+    <button mat-menu-item >Other</button>
+</mat-menu>
