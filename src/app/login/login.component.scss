@@ -1,0 +1,33 @@
+mat-card {
+    width: 50%;
+    margin: auto;
+    top: 15%;
+    padding: 10px;
+    p {
+        padding: 10px;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+button {
+    margin: auto;
+    width: 100%;
+}
+
+//mobile view
+@media only screen and (max-width: 600px) {
+    mat-card {
+        width: 100%;
+        top: 5%;
+        padding: 10px;
+
+        p {
+            padding-left: 10px;
+        }
+    }
+} 

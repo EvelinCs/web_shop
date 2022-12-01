@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './home/home.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavbarModule } from './navbar/navbar.module';
+import { LoginModule } from './login/login.module';
+import { RegisterModule } from './register/register.module';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { NavbarModule } from './navbar/navbar.module';
     BrowserAnimationsModule,
 
     HomeModule,
-    NavbarModule
+    NavbarModule,
+    LoginModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

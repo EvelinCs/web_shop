@@ -1,2 +1,34 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label >Enter your email</mat-label>
+                <input matInput type="email" required>
+                <!--<input matInput placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+              </mat-form-field>
 
-<p>login works!</p>
+              <mat-form-field appearance="fill">
+                <!--    !!!!!!!!!!!!!!!!
+                    TODO: jelszó rejtés megjelenítés + validáció
+                -->
+                <mat-label>Enter your password</mat-label>
+                <input matInput type="password" required>
+                <!--<input matInput placeholder="pat@example.com" [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+              </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <!--
+            //TODO: login után átirányít a bejelentkezésre
+        -->
+        <button mat-raised-button color="primary">Login</button>
+    </mat-card-actions>
+    <mat-card-footer>
+        <p>If you're not registered yet, click <a [routerLink]="['/register']">here</a> </p>
+    </mat-card-footer>
+</mat-card>

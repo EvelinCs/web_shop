@@ -5,3 +5,12 @@
 .vcenter {
     vertical-align: super !important; //to align vertically center
 }
+
+
+//mobile view
+@media only screen and (max-width: 600px) {
+    button {
+        height: 25px !important;
+        width: 25px !important;
+    }
+} 
