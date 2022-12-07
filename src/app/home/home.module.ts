@@ -4,6 +4,10 @@ import { HomeComponent } from './home.component';
 
 import { NavbarModule } from '../navbar/navbar.module';
 import { AppRoutingModule } from '../././app-routing.module';
+import { CatOtherProductModule } from '../products/cat/cat-other-product/cat-other-product.module';
+import { CatFoodModule } from '../products/cat/cat-food/cat-food.module';
+import { DogFoodModule } from '../products/dog/dog-food/dog-food.module';
+import { DogOtherProductModule } from '../products/dog/dog-other-product/dog-other-product.module';
 
 
 @NgModule({
@@ -13,7 +17,11 @@ import { AppRoutingModule } from '../././app-routing.module';
   imports: [
     CommonModule,
     NavbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CatOtherProductModule,
+    CatFoodModule,
+    DogFoodModule,
+    DogOtherProductModule
   ],
   exports: [
     HomeComponent

@@ -5,6 +5,7 @@ import { MenuComponent } from './menu.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu'; 
+import { AppRoutingModule } from '../../app-routing.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {MatMenuModule} from '@angular/material/menu';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    AppRoutingModule
   ],
   exports: [MenuComponent]
 })

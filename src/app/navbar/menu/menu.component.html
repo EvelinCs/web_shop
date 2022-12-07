@@ -6,11 +6,11 @@
 </mat-menu>
 
 <mat-menu #dogMenu="matMenu">
-    <button mat-menu-item >Food</button>
-    <button mat-menu-item >Other</button>
+    <button mat-menu-item [routerLink]="['/dog-food']">Food</button>
+    <button mat-menu-item [routerLink]="['/dog-product']">Other</button>
 </mat-menu>
 
 <mat-menu #catMenu="matMenu">
-    <button mat-menu-item >Food</button>
-    <button mat-menu-item >Other</button>
+    <button mat-menu-item [routerLink]="['/cat-food']">Food</button>
+    <button mat-menu-item [routerLink]="['/cat-product']">Other</button>
 </mat-menu>
