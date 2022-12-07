@@ -4,11 +4,16 @@ mat-card {
     top: 10%;
 }
 
-form {
+mat-card-content {
     display: flex;
     flex-direction: column;
     padding: 10px;
 }
+
+mat-form-field {
+    padding-bottom: 20px;
+}
+
 
 button {
     margin: auto;

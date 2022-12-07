@@ -2,41 +2,65 @@
     <mat-card-header>
         <mat-card-title>Register</mat-card-title>
     </mat-card-header>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
     <mat-card-content>
-        <form>
             <mat-form-field appearance="fill">
                 <mat-label >Enter your email</mat-label>
-                <input matInput type="email" required>
-                <!--<input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                <input matInput type="email" formControlName="email" required [errorStateMatcher]="matcher">
+                <mat-error *ngIf="email?.invalid && !email?.pristine">
+                    <small *ngIf="email?.errors?.['required']">
+                        Email is required.
+                    </small>
+                    <small *ngIf="email?.errors?.['email']">
+                        Incorrect email address.
+                    </small>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="fill">
-                <!--    !!!!!!!!!!!!!!!!
-                    TODO: jelszó rejtés megjelenítés + validáció
-                -->
                 <mat-label>Enter your password</mat-label>
-                <input matInput type="password" required>
-                <!--<input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"  required [errorStateMatcher]="matcherPwd">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword" type="button">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                <mat-error *ngIf="password?.invalid && !password?.pristine">
+                    <small *ngIf="password?.errors?.['required']">
+                        Password is required.
+                    </small>
+                    <small *ngIf="password?.errors?.['minlength']">
+                        Password must be at least 8 characters.
+                    </small>
+                    <small *ngIf="password?.errors?.['noDigit']">
+                        Password must contain at least one number.
+                    </small>
+                    <small *ngIf="password?.errors?.['noCapitalLetter']">
+                        Password must contain at least one capital letter.
+                    </small>
+                    <small *ngIf="password?.errors?.['noSpecialCharacter']">
+                        Password must contain at least one special character, like: .,/? ect.
+                    </small>
+                </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="fill">
-                <!--    !!!!!!!!!!!!!!!!
-                    TODO: jelszó rejtés megjelenítés + validáció
-                -->
-                <mat-label>Confirm your password</mat-label>
-                <input matInput type="password" required>
-                <!--<input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+                <mat-label>Enter your password again</mat-label>
+                <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"  required [errorStateMatcher]="matcherConfirmPwd">
+
+                <!--We must add type="button" to the eye button, else it will function as a submit button!!!-->
+
+                <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword" type="button">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm?.errors?.['noMatch']">
+                    <!--<small *ngIf="registerForm?.errors?.['noMatch']">
+                        Passwords don't match.
+                    </small>-->Passwords don't match.
+                </mat-error>
               </mat-form-field>
-        </form>
+        
     </mat-card-content>
     <mat-card-actions>
-        <!--
-            //TODO: reg után átirányít a bejelentkezésre
-        -->
-
-        <button mat-raised-button color="primary">Register</button>
+        <button [disabled]="!registerForm.valid" type="submit" mat-raised-button color="primary">Register</button>
     </mat-card-actions>
+</form>
 </mat-card>

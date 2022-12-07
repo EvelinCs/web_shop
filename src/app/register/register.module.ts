@@ -7,6 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { AppRoutingModule } from '../app-routing.module';
+import {ReactiveFormsModule} from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AppRoutingModule } from '../app-routing.module';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   exports: [
     RegisterComponent
