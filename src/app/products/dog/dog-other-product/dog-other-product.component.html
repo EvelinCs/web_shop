@@ -1,1 +1,20 @@
-<h1>Dog Products</h1>
+<h1>Dog Product</h1>
+<div class="container">
+<mat-card *ngFor="let element of dogProduct;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{element.name}}</mat-card-title>
+      <mat-card-subtitle>By {{element.brand}}</mat-card-subtitle>
+      <mat-card-subtitle class="price">{{element.price | currency: 'GBP'}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{element.image}}" alt="{{element.name}}">
+    <mat-card-content>
+      <p>
+        {{element.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Add to cart</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

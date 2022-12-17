@@ -1,12 +1,52 @@
+h1 {
+    padding: 10px;
+}
 .container {
     display: flex;
     flex-wrap: wrap;
     column-gap: 1%;
-    row-gap: 1%;
+    row-gap: 1rem;
 }
 
 mat-card {
     width: 24%;
+    height: 30rem;
+}
+
+mat-card-header {
+   padding-left: 0;
+}
+
+mat-card-title {
+    padding-left: 0 !important;
+}
+
+
+p {
+  text-overflow: ellipsis;  // adds ... at the end of paragraph
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 3.5em;
+  line-height: 1.6em;
+}
+
+
+img {
+    height: 70%;
+    width: 70%;
+    align-self: center;
+}
+
+.price {
+    color: red;
+    font-size: 30px;
+    font-style: italic;
+}
+
+button {
+    width: 100%;
 }
 
 //mobile view

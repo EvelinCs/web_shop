@@ -1,1 +1,21 @@
 <h1>Dog Food</h1>
+<div class="container">
+<mat-card *ngFor="let element of foodProduct">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{element.name}} - {{element.weight}} g</mat-card-title>
+      <mat-card-subtitle>By {{element.brand}}</mat-card-subtitle>
+      <mat-card-subtitle class="price">{{element.price | currency: 'GBP'}}</mat-card-subtitle>
+    </mat-card-header>
+    <ngx-star-rating [id]="'{{element.rating}}'"></ngx-star-rating>
+    <img mat-card-image src="{{element.image}}" alt="{{element.name}}">
+    <mat-card-content>
+      <p>
+        {{element.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Add to cart</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
