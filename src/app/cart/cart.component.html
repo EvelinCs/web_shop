@@ -1,9 +1,9 @@
-<mat-card *ngIf="cartItems.length === 0">
+<mat-card *ngIf="cartItems?.length === 0">
     <mat-card-header>
         <mat-card-title>Your cart is empty</mat-card-title>
     </mat-card-header>
     <mat-card-actions>
-        <button mat-raised-button color="primary" type="button" [routerLink]="['/home']">Shop now</button>
+        <button mat-raised-button color="primary" class="btn" type="button" [routerLink]="['/home']">Shop now</button>
     </mat-card-actions>
 </mat-card>
 
@@ -12,7 +12,7 @@
     <!-- Image Column -->
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+      <td mat-cell *matCellDef="let element" class="row"> <img [src]="element.image"/> </td>
     </ng-container>
   
     <!-- Name Column -->
@@ -24,7 +24,7 @@
     <!-- Price Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.price | currency: 'GBP'}} </td>
     </ng-container>
 
     <!-- Quantity Column -->
@@ -43,7 +43,7 @@
     <ng-container matColumnDef="subtotal">
         <th mat-header-cell *matHeaderCellDef> Subtotal </th>
         <td mat-cell *matCellDef="let element"> 
-            {{element.quantity * element.price}}
+            {{(element.quantity * element.price) | currency: 'GBP'}}
         </td>
     </ng-container>
 
