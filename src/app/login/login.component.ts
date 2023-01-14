@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   
   hide = true;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private auth: AuthService){}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -19,9 +20,13 @@ export class LoginComponent {
   });
 
   login(): void {
-    console.log("Login");
+    if (this.email.valid && this.password.valid){
+      this.auth.login(this.email.value, this.password.value); 
+    }
+    else {
+      return;
+    }
     
-    this.router.navigateByUrl('/home'); 
   }
 
   get email(){

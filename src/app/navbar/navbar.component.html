@@ -3,7 +3,7 @@
     <a  mat-flat-button color="primary" [routerLink]="['/home']">My Application</a>
     <div class="right">
     <button  mat-icon-button><mat-icon>search</mat-icon></button>
-    <button  mat-icon-button><mat-icon>favorite</mat-icon></button>
+    <button *ngIf="isLoggedIn" mat-icon-button><mat-icon>favorite</mat-icon></button>
     <button  mat-icon-button matBadge="{{cartService.cartItems_quantity}}" matBadgeColor="warn" [routerLink]="['/cart']">
         <mat-icon>shopping_cart</mat-icon>
         <span class="cdk-visually-hidden">
