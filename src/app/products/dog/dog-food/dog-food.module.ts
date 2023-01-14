@@ -5,7 +5,7 @@ import { DogFoodComponent } from './dog-food.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {NgxStarRatingModule} from 'ngx-star-rating';
+
 
 
 
@@ -17,8 +17,7 @@ import {NgxStarRatingModule} from 'ngx-star-rating';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule,
-    NgxStarRatingModule
+    MatIconModule
   ],
   exports: [
     DogFoodComponent
