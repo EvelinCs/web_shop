@@ -61,5 +61,14 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div *ngIf="cartItems?.length > 0" class="totalPrice">
+    Total price: {{totalPrice | currency: 'GBP'}}
+  </div>
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" class="btn" type="button" *ngIf="cartItems?.length > 0" [routerLink]="['/home']">Go shopping</button>
+    <button mat-raised-button color="primary" class="btn" type="button" *ngIf="cartItems?.length > 0" (click)="order()">Order</button>
+  </div>
   
 

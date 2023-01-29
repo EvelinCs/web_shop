@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 
@@ -8,11 +8,23 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth, private router: Router) { }
+  userLoggedIn: boolean;
 
-  login(email: string, password: string){
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+  constructor(private auth: Auth, private router: Router) {
+        this.userLoggedIn = false;
+
+        onAuthStateChanged(this.auth, (user) => {    
+            if (user) {
+                this.userLoggedIn = true;
+            } else {
+                this.userLoggedIn = false;
+            }
+        });
+   }
+
+   login(email: string, password: string){
+    this.auth = getAuth();
+    signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
@@ -29,8 +41,8 @@ export class AuthService {
       return;
     }
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
+    this.auth = getAuth();
+    createUserWithEmailAndPassword(this.auth, email, password)
     .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
@@ -45,34 +57,16 @@ export class AuthService {
   }
 
   logout(){
-    const auth = getAuth();
-    signOut(auth).then(() => {
+    this.auth = getAuth();
+    
+    signOut(this.auth).then(() => {
+      //this.userLoggedIn = false;
       this.router.navigateByUrl('/home'); 
       // Sign-out successful.
     }).catch((error) => {
       // An error happened.
     });
+   
   }
 
-  userLoggedIn(){
-    const auth = getAuth();
-
-    let ret;
-    
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        ret = true;
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // ...
-      } else {
-        ret = false;
-      // User is signed out
-      // ...
-  } 
-  
-});
-return ret;
-  }
 }

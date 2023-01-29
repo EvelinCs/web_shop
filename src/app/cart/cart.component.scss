@@ -14,7 +14,6 @@ button {
 
 td:first-child{
     width: 20%;
-
 }
 
 img {
@@ -24,6 +23,17 @@ img {
 
 .btn {
     width: 100%;
+    margin-top: 20px;
+}
+
+.buttons {
+    position: relative;
+    top: 10%;
+}
+
+.totalPrice{
+    position: relative;
+    left: 85%;
 }
 
 //mobile view
@@ -55,5 +65,10 @@ img {
             height: 10rem !important;
 
         }
+    }
+
+    .totalPrice {
+        left: 40%;
+        padding-top: 10px;
     }
 } 
