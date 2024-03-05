@@ -9,6 +9,8 @@ import { CatOtherProductComponent } from './products/cat/cat-other-product/cat-o
 import { DogFoodComponent } from './products/dog/dog-food/dog-food.component';
 import { DogOtherProductComponent } from './products/dog/dog-other-product/dog-other-product.component';
 import { RegisterComponent } from './register/register.component';
+import { ProdListComponent } from './prod-list/prod-list.component';
+import { AddProductComponent } from './prod-list/add-product/add-product.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "cart", component: CartComponent},
+  {path: "prod-list", component: ProdListComponent},
+  {path: "add-product", component: AddProductComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 

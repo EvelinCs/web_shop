@@ -12,11 +12,11 @@ export class CartService {
 
   addToCart(item: CartProduct) {
     
-    var index = this.cartItems.findIndex(x => x.name === item.name);
+    var index = this.cartItems.findIndex(x => x.name === item.name);  //benne van e már a termék
 
-    if(index === -1){ //there is no such item in cart
+    if(index === -1){ //ha nincs benne, belerakjuk
       this.cartItems.push(item);
-    } else {  //the item is already in the cart
+    } else {  //ha már benne van a kosárban, töröljük onnan és hozzáadjuk a megnövelt mennyiséggel
 
       /*let num = this.cartItems.filter(x => x.name === item.name).length;
 

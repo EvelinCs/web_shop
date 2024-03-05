@@ -61,6 +61,7 @@ export class CartComponent implements OnInit{
   }
 
   order(){
+    //TODO
     console.log("order");
   }
 

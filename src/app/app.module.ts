@@ -18,6 +18,8 @@ import { RegisterModule } from './register/register.module';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { ProdListComponent } from './prod-list/prod-list.component';
+import { ProdListModule } from './prod-list/prod-list.module';
 
 
 @NgModule({
@@ -37,6 +39,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     NavbarModule,
     LoginModule,
     RegisterModule,
+    ProdListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
