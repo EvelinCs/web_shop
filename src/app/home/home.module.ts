@@ -8,6 +8,8 @@ import { CatOtherProductModule } from '../products/cat/cat-other-product/cat-oth
 import { CatFoodModule } from '../products/cat/cat-food/cat-food.module';
 import { DogFoodModule } from '../products/dog/dog-food/dog-food.module';
 import { DogOtherProductModule } from '../products/dog/dog-other-product/dog-other-product.module';
+import { StarRatingModule } from '../products/shared/star-rating/star-rating.module';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { DogOtherProductModule } from '../products/dog/dog-other-product/dog-oth
     CatOtherProductModule,
     CatFoodModule,
     DogFoodModule,
-    DogOtherProductModule
+    DogOtherProductModule, 
+    StarRatingModule
   ],
   exports: [
     HomeComponent

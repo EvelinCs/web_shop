@@ -22,8 +22,10 @@ export class DogFoodComponent {
 
     if(this.auth.userLoggedIn) {
       var cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
-        1, cartElement.price, "");
+        1, cartElement.price, ""); 
   
+      
+
       this.cartService.addToCart(cartItem);
       this.router.navigateByUrl('/cart'); 
 
@@ -42,4 +44,15 @@ export class DogFoodComponent {
     return dogArray;
   }
 
+
+  onRatingAdded(productId: string, newRating: number) {
+    let product = this.foodProduct.find(p => p.id === productId);
+    if (product) {
+        //TODO
+
+      // Itt frissítheti az adatbázist az új értékelésekkel.
+
+      
+    }
+  }
 }

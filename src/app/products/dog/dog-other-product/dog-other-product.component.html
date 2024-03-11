@@ -8,6 +8,10 @@
       <mat-card-subtitle class="price">{{element.price | currency: 'GBP'}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="{{element.image}}" alt="{{element.name}}">
+    <app-star-rating
+    [ratings]="element.rating"
+    (ratingAdded)="onRatingAdded(element.id, $event)"
+      ></app-star-rating>
     <mat-card-content>
       <p>
         {{element.description}}

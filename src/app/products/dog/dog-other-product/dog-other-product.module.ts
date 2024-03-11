@@ -5,6 +5,7 @@ import { DogOtherProductComponent } from './dog-other-product.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { StarRatingModule } from '../../shared/star-rating/star-rating.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule, 
+    StarRatingModule
   ],
   exports: [
     DogOtherProductComponent

@@ -24,6 +24,7 @@ import { AddProductModule } from './add-product/add-product.module';
     MatIconModule,
     MatButtonModule,
     AddProductModule
-  ]
+  ], 
+  exports: [ProdListComponent]
 })
 export class ProdListModule { }

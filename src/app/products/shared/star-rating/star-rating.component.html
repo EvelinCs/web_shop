@@ -1,0 +1,17 @@
+<div class="star-rating">
+    <!--<span
+      *ngFor="let star of stars; let i = index"
+      class="star"
+      [class.filled]="i < averageRating"
+      (click)="rate(i + 1)"
+    >
+    &#9733;
+    </span>-->
+    <span
+  *ngFor="let star of stars; let i = index"
+  class="star"
+  [ngClass]="{'filled': i < averageRating, 'half': i + 0.5 === averageRating}"
+  (click)="rate(i + 1)"
+> &#9734;
+</span>
+  </div>

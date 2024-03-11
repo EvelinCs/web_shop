@@ -1,0 +1,56 @@
+/*.star-rating {
+    font-size: 1.5rem;
+  }
+  .star {
+    cursor: pointer;
+    color: black; 
+    -webkit-text-stroke: 1px black; 
+  }
+  
+  .star.filled {
+    color: #ffac33; 
+  }
+  
+  .star:not(.filled) {
+    -webkit-text-fill-color: white; 
+    color: transparent; 
+  }*/
+  .star-rating {
+    font-size: 1.5rem;
+    line-height: 1;
+    unicode-bidi: bidi-override;
+    direction: ltr; /* Jobbról balra irányítás a fél csillagok miatt */
+    text-align: center;
+  }
+  
+  .star {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    color: transparent; 
+  }
+  
+  .star:before {
+    content: "\2606"; /* Üres csillag Unicode karakter */
+    position: absolute;
+    left: 0;
+    color: black; 
+  }
+  
+  .star:after {
+    content: "\2605"; /* Kitöltött csillag Unicode karakter */
+    position: absolute;
+    left: 0;
+    width: 0; /* Kezdetben a kitöltött rész szélessége 0 */
+    overflow: hidden;
+    color: #ffac33; 
+  }
+  
+  .star.filled:after {
+    width: 100%; /* Teljesen kitöltött csillag */
+  }
+  
+  .star.half:after {
+    width: 50%; /* Fél csillag kitöltése */
+  }
+  

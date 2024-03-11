@@ -41,4 +41,15 @@ export class CatFoodComponent {
     return catArray;
   }
 
+  onRatingAdded(productId: string, newRating: number) {
+    let product = this.foodProduct.find(p => p.id === productId);
+    if (product) {
+        //TODO
+
+      // Itt frissítheti az adatbázist az új értékelésekkel.
+
+      
+    }
+  }
+
 }

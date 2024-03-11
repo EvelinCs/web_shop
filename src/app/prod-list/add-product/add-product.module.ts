@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatIconModule,
     MatInputModule
-  ]
+  ], 
+  exports: [AddProductComponent]
 })
 export class AddProductModule { }
