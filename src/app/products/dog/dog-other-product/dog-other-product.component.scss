@@ -45,9 +45,33 @@ img {
     font-style: italic;
 }
 
+.forSale{
+    text-decoration:line-through;
+    color: black;
+    padding-left: 10px;
+}
+
+.forSalePrice{
+    padding-left: 10px;
+}
+
+.forSalePercent{
+    color: red;;
+}
+
+.available {
+    color: green;
+    text-align: center;
+}
+.notAvailable{
+    color: red;
+    text-align: center;
+}
+
 button {
     width: 100%;
 }
+
 
 //mobile view
 @media only screen and (max-width: 600px) {
