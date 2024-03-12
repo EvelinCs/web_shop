@@ -19,7 +19,9 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { ProdListModule } from './prod-list/prod-list.module';
-import { StarRatingComponent } from './products/shared/star-rating/star-rating.component';
+import { FoodDetailModule } from './products/food-details/food-detail.module';
+import { OtherProductDetailModule } from './products/other-product-details/other-product-detail.module';
+import { FoodProductListModule } from './food-product-list/food-product-list.module';
 
 
 @NgModule({
@@ -41,6 +43,9 @@ import { StarRatingComponent } from './products/shared/star-rating/star-rating.c
     LoginModule,
     RegisterModule,
     ProdListModule,
+    FoodDetailModule,
+    OtherProductDetailModule,
+    FoodProductListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

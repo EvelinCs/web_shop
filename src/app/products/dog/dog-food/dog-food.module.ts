@@ -6,6 +6,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { StarRatingModule } from '../../shared/star-rating/star-rating.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { StarRatingModule } from '../../shared/star-rating/star-rating.module';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    StarRatingModule
+    StarRatingModule,
+    RouterModule
   ],
   exports: [
     DogFoodComponent

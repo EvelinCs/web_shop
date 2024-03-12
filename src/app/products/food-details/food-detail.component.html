@@ -1,0 +1,31 @@
+<div class="container">
+<mat-card *ngIf="foodProduct">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{foodProduct.name}} - {{foodProduct.weight}} g</mat-card-title>
+      <mat-card-subtitle>By {{foodProduct.brand}}</mat-card-subtitle>
+      <mat-card-subtitle class="price" *ngIf="foodProduct.sale === 0">{{foodProduct.price | currency: 'GBP'}}</mat-card-subtitle>
+      <mat-card-subtitle class="price" *ngIf="foodProduct.sale > 0">
+        <span class="forSale">{{foodProduct.price | currency: 'GBP'}}</span>    
+        <span class="forSalePrice">{{foodProduct.price - (foodProduct.price * (foodProduct.sale / 100)) | currency: 'GBP'}}</span>
+    
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="img-container">
+      <img mat-card-image src="{{foodProduct.image}}" alt="{{foodProduct.name}}">
+      <span *ngIf="foodProduct.sale > 0" class="forSalePercent">{{foodProduct.sale}} %</span>
+    </div>
+    <app-star-rating [ratings]="foodProduct.rating" (ratingAdded)="onRatingAdded(foodProduct.id, $event)"></app-star-rating>
+    <mat-card-subtitle *ngIf="foodProduct.available > 0" class="available">&#10004; In stock</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="foodProduct.available === 0" class="notAvailable">&#10008; Out of stock</mat-card-subtitle>
+    <mat-card-content>
+      <p>
+        {{foodProduct.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button class="btn" type="button" color="primary" (click)="addToCart(foodProduct); ">Add to cart</button>
+      
+    </mat-card-actions>
+  </mat-card>
+</div>

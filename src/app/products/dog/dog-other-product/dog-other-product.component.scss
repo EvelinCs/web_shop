@@ -10,7 +10,8 @@ h1 {
 
 mat-card {
     width: 24%;
-    height: 30rem;
+    height: 35rem;
+    
 }
 
 mat-card-header {
@@ -19,29 +20,41 @@ mat-card-header {
 
 mat-card-title {
     padding-left: 0 !important;
+    font-size: 1.5em;
 }
 
-
-p {
-  text-overflow: ellipsis;  // adds ... at the end of paragraph
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  max-height: 3.5em;
-  line-height: 1.6em;
+mat-card-actions {
+    display: block;
 }
 
+.img-container {
+    position: relative;
+    height: 35%;
+    width: auto;
+    margin: 10px auto auto auto;
+}
 
-img {
-    height: 70%;
-    width: 70%;
+.img-container img {
+    display: block;
+    height: 100%;
+    width: auto;
     align-self: center;
+}
+
+.img-container .forSalePercent {
+    position: absolute;
+    top: 0; 
+    right: 30px; 
+    background-color: red; 
+    color: white; 
+    padding: 5px; 
+    border-radius: 5px; 
+    font-size: 1em; 
 }
 
 .price {
     color: red;
-    font-size: 30px;
+    font-size: 2em;
     font-style: italic;
 }
 
@@ -53,10 +66,9 @@ img {
 
 .forSalePrice{
     padding-left: 10px;
-}
-
-.forSalePercent{
-    color: red;;
+    color: red;
+    font-size: 2em;
+    font-style: italic;
 }
 
 .available {
@@ -68,10 +80,23 @@ img {
     text-align: center;
 }
 
-button {
+p {
+    text-overflow: ellipsis;  // adds ... at the end of paragraph
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3.5em;
+    line-height: 1.6em;
+  }
+
+.btn {
     width: 100%;
 }
 
+.btn:first-child {
+    margin-bottom: 5px;
+}
 
 //mobile view
 @media only screen and (max-width: 600px) {

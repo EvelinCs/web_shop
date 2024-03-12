@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProdListComponent } from './prod-list.component';
+import { FoodProductListComponent } from './food-product-list.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AddProductModule } from './add-product/add-product.module';
+import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
+import { AddFoodProductModule } from './add-food-product/add-food-product.module';
 
 
 
 @NgModule({
-  declarations: [
-    ProdListComponent,
-    
-  ],
+  declarations: [FoodProductListComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -22,8 +20,9 @@ import { AddProductModule } from './add-product/add-product.module';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    AddProductModule
+    AddFoodProductModule
   ], 
-  exports: [ProdListComponent]
+  exports: 
+  [FoodProductListComponent]
 })
-export class ProdListModule { }
+export class FoodProductListModule { }

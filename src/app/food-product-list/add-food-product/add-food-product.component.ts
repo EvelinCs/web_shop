@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  selector: 'app-add-food-product',
+  templateUrl: './add-food-product.component.html',
+  styleUrls: ['./add-food-product.component.scss']
 })
-export class AddProductComponent {
+export class AddFoodProductComponent {
 
   addProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -18,6 +18,8 @@ export class AddProductComponent {
     rating: new FormControl('', [Validators.required]), 
     image: new FormControl('', [Validators.required]), 
     available: new FormControl('', [Validators.required]), 
+    weight: new FormControl('', [Validators.required]), 
+    lastTil: new FormControl('', [Validators.required]), 
   });
 
   
@@ -64,4 +66,11 @@ export class AddProductComponent {
     return this.addProductForm.get('available');
   }
 
+  get weight(){
+    return this.addProductForm.get('weight');
+  }
+
+  get lastTil(){
+    return this.addProductForm.get('lastTil');
+  }
 }

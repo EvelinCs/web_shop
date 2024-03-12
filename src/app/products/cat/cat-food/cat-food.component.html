@@ -6,14 +6,16 @@
       <mat-card-title>{{element.name}} - {{element.weight}} g</mat-card-title>
       <mat-card-subtitle>By {{element.brand}}</mat-card-subtitle>
       <mat-card-subtitle class="price" *ngIf="element.sale === 0">{{element.price | currency: 'GBP'}}</mat-card-subtitle>
-      <mat-card-subtitle class="price" *ngIf="element.sale > 0">
-        <span class="forSalePercent">{{element.sale}} %</span>
+      <mat-card-subtitle  *ngIf="element.sale > 0">
         <span class="forSale">{{element.price | currency: 'GBP'}}</span>    
         <span class="forSalePrice">{{element.price - (element.price * (element.sale / 100)) | currency: 'GBP'}}</span>
     
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{element.image}}" alt="{{element.name}}">
+    <div class="img-container">
+      <img mat-card-image src="{{element.image}}" alt="{{element.name}}">
+      <span *ngIf="element.sale > 0" class="forSalePercent">{{element.sale}} %</span>
+    </div>
     <app-star-rating [ratings]="element.rating" (ratingAdded)="onRatingAdded(element.id, $event)"></app-star-rating>
     <mat-card-subtitle *ngIf="element.available > 0" class="available">&#10004; In stock</mat-card-subtitle>
     <mat-card-subtitle *ngIf="element.available === 0" class="notAvailable">&#10008; Out of stock</mat-card-subtitle>
@@ -23,7 +25,8 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="addToCart(element);">Add to cart</button>
+      <div><a mat-raised-button color="primary" class="btn" [routerLink]="['/cat-food', element.id]">View details</a></div>
+      <button mat-raised-button color="primary" class="btn" (click)="addToCart(element);">Add to cart</button>
     </mat-card-actions>
   </mat-card>
 </div>

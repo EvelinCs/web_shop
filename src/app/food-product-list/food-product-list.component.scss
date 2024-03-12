@@ -1,0 +1,65 @@
+mat-card {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    top: 15%;
+    padding: 20px;
+    align-items: center;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+}
+
+td:first-child{
+    width: 20%;
+}
+
+img {
+    height: 90%;
+    width: 90%;   
+}
+
+.btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.buttons {
+    position: relative;
+    top: 10%;
+}
+
+//mobile view
+@media only screen and (max-width: 600px) {
+    mat-card {
+        width: 100%;
+        top: 20%;
+        padding: 10px;
+    }
+
+    table {
+        width: 1vw;
+    }
+
+
+    .mat-mdc-table .mdc-data-table__row{
+        td{
+            display: block;
+            width: 20rem;
+            height: 3rem;
+            text-align: center;
+
+            img {
+                width: 10rem;
+                height: 10rem;
+            }
+        }
+        td:first-child{
+            height: 10rem !important;
+
+        }
+    }
+
+} 

@@ -1,0 +1,30 @@
+<div class="container">
+<mat-card *ngIf="otherProduct">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{otherProduct.name}}</mat-card-title>
+      <mat-card-subtitle>By {{otherProduct.brand}}</mat-card-subtitle>
+      <mat-card-subtitle class="price" *ngIf="otherProduct.sale === 0">{{otherProduct.price | currency: 'GBP'}}</mat-card-subtitle>
+      <mat-card-subtitle class="price" *ngIf="otherProduct.sale > 0">
+        <span class="forSale">{{otherProduct.price | currency: 'GBP'}}</span>    
+        <span class="forSalePrice">{{otherProduct.price - (otherProduct.price * (otherProduct.sale / 100)) | currency: 'GBP'}}</span>
+    
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="img-container">
+        <img mat-card-image src="{{otherProduct.image}}" alt="{{otherProduct.name}}">
+        <span *ngIf="otherProduct.sale > 0" class="forSalePercent">{{otherProduct.sale}} %</span>
+      </div>
+    <app-star-rating [ratings]="otherProduct.rating" (ratingAdded)="onRatingAdded(otherProduct.id, $event)"></app-star-rating>
+    <mat-card-subtitle *ngIf="otherProduct.available > 0" class="available">&#10004; In stock</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="otherProduct.available === 0" class="notAvailable">&#10008; Out of stock</mat-card-subtitle>
+    <mat-card-content>
+      <p>
+        {{otherProduct.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addToCart(otherProduct); ">Add to cart</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

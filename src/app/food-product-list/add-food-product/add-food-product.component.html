@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Add product</mat-card-title>
+        <mat-card-title>Add food product</mat-card-title>
     </mat-card-header>
     <form [formGroup]="addProductForm" (ngSubmit)="addProduct()">
     <mat-card-content>
@@ -90,6 +90,26 @@
                 <mat-error *ngIf="available?.invalid && !available?.pristine">
                     <small *ngIf="available?.errors?.['required']">
                         Available is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Weight</mat-label>
+                <input matInput type="number" formControlName="weight" required>
+                <mat-error *ngIf="weight?.invalid && !weight?.pristine">
+                    <small *ngIf="weight?.errors?.['required']">
+                        Weight is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Lasts till</mat-label>
+                <input matInput type="number" formControlName="lastTil" required>
+                <mat-error *ngIf="lastTil?.invalid && !lastTil?.pristine">
+                    <small *ngIf="lastTil?.errors?.['required']">
+                        Lasts till is required.
                     </small>
                 </mat-error>
               </mat-form-field>

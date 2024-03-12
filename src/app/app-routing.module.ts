@@ -11,6 +11,10 @@ import { DogOtherProductComponent } from './products/dog/dog-other-product/dog-o
 import { RegisterComponent } from './register/register.component';
 import { ProdListComponent } from './prod-list/prod-list.component';
 import { AddProductComponent } from './prod-list/add-product/add-product.component';
+import { FoodDetailComponent } from './products/food-details/food-detail.component';
+import { OtherProductDetailComponent } from './products/other-product-details/other-product-detail.component';
+import { FoodProductListComponent } from './food-product-list/food-product-list.component';
+import { AddFoodProductComponent } from './food-product-list/add-food-product/add-food-product.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -19,11 +23,17 @@ const routes: Routes = [
   {path: "dog-product", component: DogOtherProductComponent},
   {path: "cat-food", component: CatFoodComponent},
   {path: "cat-product", component: CatOtherProductComponent},
+  {path: "dog-food/:id", component: FoodDetailComponent},
+  {path: "cat-food/:id", component: FoodDetailComponent},
+  {path: "dog-product/:id", component: OtherProductDetailComponent},
+  {path: "cat-product/:id", component: OtherProductDetailComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "cart", component: CartComponent},
   {path: "prod-list", component: ProdListComponent},
   {path: "add-product", component: AddProductComponent},
+  {path: "food-prod-list", component: FoodProductListComponent},
+  {path: "add-food-product", component: AddFoodProductComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 
