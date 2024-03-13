@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { CartItemsQuantityService } from '../services/cart-items-quantity.service';
 import { CartProduct } from '../shared/models/cartProduct';
 import { CartService } from './cart.service';
+import { OrderService } from '../order/order.service';
+import { AuthService } from '../services/auth-service.service';
+import { Order, OrderedItem } from '../shared/models/order';
 
 
 @Component({
@@ -18,9 +21,28 @@ export class CartComponent implements OnInit{
 
   cartItems = this.cartService.getProducts();
 
-  constructor(private cartQuantityService: CartItemsQuantityService, private cartService: CartService) {
+  
+
+  constructor(private cartQuantityService: CartItemsQuantityService, private cartService: CartService, 
+    private orderService: OrderService,  private router: Router) {
     this.totalPrice = 0;
     this.countPrice();
+  }
+
+  order(cartItems: CartProduct[]){
+    //TODO
+    if(cartItems.length === 0){
+      console.log("Your cart is empty");
+
+    } else {
+      let orders: OrderedItem[] = [];
+      for(let item of cartItems){
+        let order = new OrderedItem(item.id, item.name, item.price, item.image, item.quantity, item.subtotal);
+        orders.push(order);
+      }
+      this.orderService.order(orders);
+      this.router.navigateByUrl('/order');
+    }
   }
 
   ngOnInit(): void {
@@ -60,10 +82,6 @@ export class CartComponent implements OnInit{
     }
   }
 
-  order(){
-    //TODO
-    console.log("order");
-  }
 
   deleteItemFromCart(cartItem: CartProduct) {
     for (let element of this.cartItems){

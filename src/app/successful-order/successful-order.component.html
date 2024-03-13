@@ -1,0 +1,65 @@
+<mat-card *ngIf="successfulOrder === null">
+    <mat-card-header>
+        <mat-card-title>You don't have orders</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" class="btn" type="button" [routerLink]="['/home']">Shop now</button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card *ngIf="successfulOrder">
+    <mat-card-header>
+        <mat-card-title>Your order is successful</mat-card-title>
+    </mat-card-header>
+    <mat-card-subtitle>Your orders:</mat-card-subtitle>
+    <mat-card-content>
+        <table mat-table [dataSource]="successfulOrder.orderedItems" *ngIf="successfulOrder.orderedItems.length > 0">
+  
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element" class="row"> <img [src]="element.image"/> </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.price | currency: 'GBP'}} </td>
+            </ng-container>
+        
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element"> 
+                    
+                    <span class="quantity">
+                        {{element.quantity}} 
+                    </span>
+                    
+                </td>
+              </ng-container>
+        
+            <!-- Subtotal Column -->
+            <ng-container matColumnDef="subtotal">
+                <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+                <td mat-cell *matCellDef="let element"> 
+                    {{(element.quantity * element.price) | currency: 'GBP'}}
+                </td>
+            </ng-container>
+          
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div>Total price: {{successfulOrder.totalPrice | currency: 'GBP'}}</div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" class="btn" type="button" [routerLink]="['/home']">Shop now</button>
+    </mat-card-actions>
+</mat-card>

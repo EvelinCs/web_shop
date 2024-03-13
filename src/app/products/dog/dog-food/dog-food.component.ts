@@ -15,13 +15,14 @@ import {food} from'../../../shared/models/temp_data';
 export class DogFoodComponent {
 
   foodProduct?: FoodProduct[] = this.dogFood();
+  
 
   constructor(private cartService: CartService, private router: Router, private auth: AuthService){}
 
   addToCart(cartElement: Product | FoodProduct){
 
     if(this.auth.userLoggedIn) {
-      var cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
+      let cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
         1, cartElement.price, ""); 
   
       

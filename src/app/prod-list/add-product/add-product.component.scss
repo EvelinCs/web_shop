@@ -14,8 +14,11 @@ mat-form-field {
     padding-bottom: 20px;
 }
 
+mat-card-actions {
+    width: 100%;
+}
 
-button {
+button, .btn {
     margin: auto;
     width: 100%;
 }

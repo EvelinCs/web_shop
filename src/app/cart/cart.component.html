@@ -68,7 +68,7 @@
 
   <div class="buttons">
     <button mat-raised-button color="primary" class="btn" type="button" *ngIf="cartItems?.length > 0" [routerLink]="['/home']">Go shopping</button>
-    <button mat-raised-button color="primary" class="btn" type="button" *ngIf="cartItems?.length > 0" (click)="order()">Order</button>
+    <button mat-raised-button color="primary" class="btn" type="button" *ngIf="cartItems?.length > 0" (click)="order(cartItems)">Order</button>
   </div>
   
 

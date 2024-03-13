@@ -24,6 +24,7 @@ import { OtherProductDetailModule } from './products/other-product-details/other
 import { FoodProductListModule } from './food-product-list/food-product-list.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
