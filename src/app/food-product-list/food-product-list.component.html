@@ -39,23 +39,11 @@
     <td mat-cell *matCellDef="let element"> {{element.sale | currency: 'GBP'}} </td>
   </ng-container>
 
-  <!-- Description Column -->
-  <!--<ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-  </ng-container>-->
-
   <!-- Brand Column -->
   <ng-container matColumnDef="brand">
     <th mat-header-cell *matHeaderCellDef> Brand </th>
     <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
   </ng-container>
-
-  <!-- Rating Column -->
-  <!--<ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef> Rating </th>
-    <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
-  </ng-container>-->
   
     <!-- Image Column -->
     <ng-container matColumnDef="image">
@@ -68,19 +56,6 @@
     <th mat-header-cell *matHeaderCellDef> Available </th>
     <td mat-cell *matCellDef="let element"> {{element.available}} </td>
   </ng-container>
-
-  <!-- Weight Column -->
-  <!--<ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container>-->
-
-  <!-- LastTil Column -->
-  <!--<ng-container matColumnDef="lastTil">
-    <th mat-header-cell *matHeaderCellDef> LastTil </th>
-    <td mat-cell *matCellDef="let element"> {{element.lastTil}} </td>
-  </ng-container>-->
-  
     
   <!-- Edit Button Column -->
   <ng-container matColumnDef="editButton">
@@ -97,7 +72,7 @@
     <ng-container matColumnDef="deleteButton">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element"> 
-            <button (click)="deleteProduct(element.id)" mat-fab color="warn">
+            <button (click)="deleteProduct(element)" mat-fab color="warn">
                 <mat-icon>delete</mat-icon>
             </button>
         </td>

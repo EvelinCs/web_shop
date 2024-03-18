@@ -1,7 +1,7 @@
 mat-card {
     position: relative;
     width: 50%;
-    margin: auto;
+    margin: auto auto 100px auto;
     top: 15%;
     padding: 20px;
     align-items: center;
@@ -45,7 +45,7 @@ img {
 
 
     .mat-mdc-table .mdc-data-table__row{
-        td{
+        td {
             display: block;
             width: 20rem;
             height: 3rem;
@@ -58,7 +58,6 @@ img {
         }
         td:first-child{
             height: 10rem !important;
-
         }
     }
 

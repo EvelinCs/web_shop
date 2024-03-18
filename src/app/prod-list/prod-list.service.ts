@@ -20,4 +20,8 @@ export class ProdListService {
     );
   }
 
+  deleteProduct(productId: string) {
+    return this.afs.collection('Product').doc(productId).delete();
+  }
+
 }

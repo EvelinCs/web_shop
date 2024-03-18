@@ -1,0 +1,21 @@
+.noButton, .yesButton{
+    position: relative;
+    width: 40%;
+    margin-top: 20px;
+}
+
+.noButton{
+    margin-right: 5px;
+}
+.yesButton {
+    background-color: #673ab7;
+    color: white;
+}
+
+mat-dialog-title{
+    font-size: 20px;
+}
+
+.mat-mdc-dialog-actions{
+    justify-content: center !important;
+}

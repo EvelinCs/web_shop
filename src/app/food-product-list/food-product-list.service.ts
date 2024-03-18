@@ -19,4 +19,8 @@ export class FoodProductListService {
       }))
     );
   }
+
+  deleteProduct(productId: string) {
+    return this.afs.collection('FoodProduct').doc(productId).delete();
+  }
 }

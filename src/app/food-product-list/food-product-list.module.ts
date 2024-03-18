@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
 import { AddFoodProductModule } from './add-food-product/add-food-product.module';
+import { ConfirmDeleteDialogModule } from '../confirm-delete-dialog/confirm-delete-dialog.module';
 
 
 
@@ -20,7 +21,8 @@ import { AddFoodProductModule } from './add-food-product/add-food-product.module
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    AddFoodProductModule
+    AddFoodProductModule,
+    ConfirmDeleteDialogModule
   ], 
   exports: 
   [FoodProductListComponent]
