@@ -38,7 +38,7 @@ export class AddProductComponent {
       if (user) {
         // A felhasználó be van jelentkezve, folytathatja az adatbeszúrást
         this.addProductService.addProduct(this.productAdded);
-        this.router.navigateByUrl('/food-prod-list');
+        this.router.navigateByUrl('/prod-list');
       } else {
         // A felhasználó nincs bejelentkezve, kezelje ezt az esetet
         console.error('User must sign in to add data');
