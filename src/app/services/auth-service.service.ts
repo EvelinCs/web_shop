@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 
@@ -10,7 +11,7 @@ export class AuthService {
 
   userLoggedIn: boolean;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(private auth: Auth, private router: Router, private afAuth: AngularFireAuth) {
         this.userLoggedIn = false;
 
         onAuthStateChanged(this.auth, (user) => {    
@@ -21,6 +22,11 @@ export class AuthService {
             }
         });
    }
+
+   getAuthenticatedUser() {
+    return this.afAuth.authState;
+  }
+
 
    login(email: string, password: string){
     this.auth = getAuth();

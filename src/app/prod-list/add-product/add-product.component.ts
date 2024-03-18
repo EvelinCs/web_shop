@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Product } from 'src/app/shared/models/products';
+import { AddProductService } from './add-product.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-add-product',
@@ -8,14 +12,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddProductComponent {
 
+  productAdded ?: Product;
+
+  constructor(private addProductService: AddProductService, private router: Router, private authService: AuthService){}
+
   addProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     species: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required]), 
-    sale: new FormControl('', [Validators.required]), 
+    sale: new FormControl(0, [Validators.required]), 
     description: new FormControl('', [Validators.required]), 
     brand: new FormControl('', [Validators.required]), 
-    rating: new FormControl('', [Validators.required]), 
+    rating: new FormControl([0], [Validators.required]), 
     image: new FormControl('', [Validators.required]), 
     available: new FormControl('', [Validators.required]), 
   });
@@ -23,8 +31,19 @@ export class AddProductComponent {
   
 
   addProduct(){
-    //TODO
-    console.log(this.addProductForm.get('name').value + " product added");
+    this.productAdded = {};
+    Object.assign(this.productAdded, this.addProductForm.value);
+
+    this.authService.getAuthenticatedUser().subscribe(user => {
+      if (user) {
+        // A felhasználó be van jelentkezve, folytathatja az adatbeszúrást
+        this.addProductService.addProduct(this.productAdded);
+        this.router.navigateByUrl('/food-prod-list');
+      } else {
+        // A felhasználó nincs bejelentkezve, kezelje ezt az esetet
+        console.error('User must sign in to add data');
+      }
+    });
   }
 
 
