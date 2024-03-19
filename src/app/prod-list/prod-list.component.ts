@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../shared/models/products';
-import { ProdListService } from './prod-list.service';
 import { ConfirmDeleteDialogService } from '../confirm-delete-dialog/confirm-delete-dialog.service';
 import { AuthService } from '../services/auth-service.service';
+import { ListProductsService } from '../services/list-products.service';
+import { ProdListService } from './prod-list.service';
+import { EditProductService } from './edit-product/edit-product/edit-product.service';
 
 @Component({
   selector: 'app-prod-list',
@@ -15,15 +17,16 @@ export class ProdListComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'species', 'price', 'sale', 'brand', 'image', 'available', 'editButton', 'deleteButton'];
 
-  constructor(private prodListService: ProdListService, private confirmDeleteDialogService: ConfirmDeleteDialogService,
-    private authService: AuthService){}
+  constructor(private listProductService: ListProductsService, private confirmDeleteDialogService: ConfirmDeleteDialogService,
+    private authService: AuthService, private prodListService: ProdListService,
+    private editProductService: EditProductService){}
 
     ngOnInit() {
       this.loadProducts();
     }
   
     loadProducts(){
-      this.prodListService.getProducts().subscribe(data => {
+      this.listProductService.getProducts().subscribe(data => {
         this.prodList = data;
       });
     }
@@ -52,8 +55,16 @@ export class ProdListComponent implements OnInit {
       });
     }
 
-  editProduct(elementID: string) {
-    throw new Error('Method not implemented.');
+  editProduct(elementID: string, element: Product) {
+    this.authService.getAuthenticatedUser().subscribe(user => {
+      if (user) {
+        //user is logged in
+        this.editProductService.editProduct(elementID, element);
+      } else {
+        // user is not logged in
+        console.error('User must sign in to edit data');
+      }
+    });
   }
 
 }

@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AddProductModule } from './add-product/add-product.module';
+import { EditProductComponent } from './edit-product/edit-product/edit-product.component';
+import { EditProductModule } from './edit-product/edit-product/edit-product.module';
 
 
 
@@ -22,7 +24,8 @@ import { AddProductModule } from './add-product/add-product.module';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    AddProductModule
+    AddProductModule,
+    EditProductModule
   ], 
   exports: [ProdListComponent]
 })

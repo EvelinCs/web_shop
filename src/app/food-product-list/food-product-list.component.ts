@@ -3,6 +3,8 @@ import { FoodProductListService } from './food-product-list.service';
 import { FoodProduct } from '../shared/models/products';
 import { ConfirmDeleteDialogService } from '../confirm-delete-dialog/confirm-delete-dialog.service';
 import { AuthService } from '../services/auth-service.service';
+import { ListProductsService } from '../services/list-products.service';
+import { EditFoodProductService } from './edit-food-product/edit-food-product.service';
 
 @Component({
   selector: 'app-food-product-list',
@@ -13,18 +15,19 @@ export class FoodProductListComponent implements OnInit {
 
   foodProdList: FoodProduct[] = [];
 
-  //displayedColumns: string[] = ['id', 'name', 'species', 'price', 'sale', 'description', 'brand', 'rating','image', 'available', 'weight', 'lastTil', 'editButton', 'deleteButton'];
   displayedColumns: string[] = ['id', 'name', 'species', 'price', 'sale', 'brand', 'image', 'available', 'editButton', 'deleteButton'];
 
   constructor(private foodProductListService: FoodProductListService, private confirmDeleteDialogService: ConfirmDeleteDialogService,
-     private authService: AuthService){}
+     private authService: AuthService, private listProductsService: ListProductsService,
+     private editFoodProductService: EditFoodProductService){}
 
   ngOnInit() {
+    
     this.loadProducts();
   }
 
   loadProducts(){
-    this.foodProductListService.getProducts().subscribe(data => {
+    this.listProductsService.getFoodProducts().subscribe(data => {
       this.foodProdList = data;
     });
   }
@@ -53,7 +56,15 @@ export class FoodProductListComponent implements OnInit {
     });
   }
 
-  editProduct(elementID: string) {
-    throw new Error('Method not implemented.');
-    }
+  editFoodProduct(elementID: string, element: FoodProduct) {
+    this.authService.getAuthenticatedUser().subscribe(user => {
+      if (user) {
+        //user is logged in
+        this.editFoodProductService.editFoodProduct(elementID, element);
+      } else {
+        // user is not logged in
+        console.error('User must sign in to edit data');
+      }
+    });
+  }
 }

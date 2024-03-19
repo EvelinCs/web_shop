@@ -4,12 +4,14 @@ export class Order {
     orderedItems: OrderedItem[];
     totalPrice: number;
     user: User;
+    orderDate: Date;
     
 
-    constructor(orderedItems: OrderedItem[], totalPrice: number, user: User){
+    constructor(orderedItems: OrderedItem[], totalPrice: number, user: User, orderDate: Date){
             this.orderedItems = orderedItems;  
             this.totalPrice = totalPrice;
             this.user = user;
+            this.orderDate = orderDate;
         }
 
 }

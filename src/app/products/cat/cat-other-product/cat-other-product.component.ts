@@ -1,22 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/cart/cart.service';
 import { AuthService } from 'src/app/services/auth-service.service';
+import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product } from 'src/app/shared/models/products';
 
-import {product} from'../../../shared/models/temp_data';
 
 @Component({
   selector: 'app-cat-other-product',
   templateUrl: './cat-other-product.component.html',
   styleUrls: ['./cat-other-product.component.scss']
 })
-export class CatOtherProductComponent {
+export class CatOtherProductComponent implements OnInit {
 
-  catProduct?: Product[] = this.catProducts();
+  catProducts?: Product[] = [];
 
-  constructor(private cartService: CartService, private router: Router, private auth: AuthService){}
+  constructor(private cartService: CartService, private router: Router, private auth: AuthService,
+    private listProductsService: ListProductsService){}
+
+    ngOnInit(): void {
+      this.getCatPruducts();
+    }
+  
+    getCatPruducts(){
+      this.listProductsService.getCatProducts().subscribe(data => {
+        this.catProducts = data;
+      });
+    }
 
   addToCart(cartElement: Product | FoodProduct){
 
@@ -31,18 +42,8 @@ export class CatOtherProductComponent {
     }
   }
 
-  catProducts() {
-    let catProductArray: Product[] = [];
-    for(let element of product){
-      if(element.species === 'cat') {
-        catProductArray.push(element);
-      }
-    }
-    return catProductArray;
-  }
-
   onRatingAdded(productId: string, newRating: number) {
-    let product = this.catProduct.find(p => p.id === productId);
+    let product = this.catProducts.find(p => p.id === productId);
     if (product) {
         //TODO
 

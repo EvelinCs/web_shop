@@ -9,19 +9,13 @@ import { Product } from '../shared/models/products';
 export class ProdListService {
 
   constructor(private afs: AngularFirestore) { }
-  
-  getProducts(): Observable<Product[]> {
-    return this.afs.collection('Product').snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        let data = a.payload.doc.data() as Product;
-        let id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-  }
 
   deleteProduct(productId: string) {
     return this.afs.collection('Product').doc(productId).delete();
+  }
+
+  editProduct(productId: string) {
+    
   }
 
 }

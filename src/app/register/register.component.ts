@@ -18,6 +18,9 @@ export class RegisterComponent {
 
   registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
+      userName: new FormControl('', [Validators.required]),
+      userAddress: new FormControl('', [Validators.required]),
+      userPhone: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(8),
         mustContainDigit(/\d/), mustContainCapitalLetter(/.*[A-Z].*/), 
         mustContainSpecialCharacter(/.*\W.*/)]),
@@ -29,17 +32,30 @@ export class RegisterComponent {
   constructor(private router: Router, private authService: AuthService){}
 
   register(): void {
-    if(this.email.valid && this.password.valid && this.confirmPassword.valid){
-      this.authService.register(this.email.value, this.password.value, this.confirmPassword.value);
+    if(this.registerForm.valid){
+
+      this.authService.register(this.email.value, this.password.value, this.confirmPassword.value, this.userName.value, this.userAddress.value, this.userPhone.value);
+
     }
     else {
       return;
-    }
-    
+    } 
   }
 
   get email(){
     return this.registerForm.get('email');
+  }
+
+  get userName(){
+    return this.registerForm.get('userName');
+  }
+
+  get userAddress(){
+    return this.registerForm.get('userAddress');
+  }
+
+  get userPhone(){
+    return this.registerForm.get('userPhone');
   }
 
   get password(){

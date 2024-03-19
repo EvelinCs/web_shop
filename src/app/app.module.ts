@@ -22,8 +22,6 @@ import { ProdListModule } from './prod-list/prod-list.module';
 import { FoodDetailModule } from './products/food-details/food-detail.module';
 import { OtherProductDetailModule } from './products/other-product-details/other-product-detail.module';
 import { FoodProductListModule } from './food-product-list/food-product-list.module';
-import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
-
 
 
 @NgModule({

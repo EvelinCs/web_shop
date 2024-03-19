@@ -10,17 +10,11 @@ export class FoodProductListService {
 
   constructor(private afs: AngularFirestore) { }
 
-  getProducts(): Observable<FoodProduct[]> {
-    return this.afs.collection('FoodProduct').snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        let data = a.payload.doc.data() as FoodProduct;
-        let id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-    );
-  }
-
   deleteProduct(productId: string) {
     return this.afs.collection('FoodProduct').doc(productId).delete();
+  }
+
+  editFoodProduct(productID: string){
+    
   }
 }

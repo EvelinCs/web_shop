@@ -62,7 +62,7 @@
     <mat-card-header>
         <mat-card-title>Please provide your details</mat-card-title>
     </mat-card-header>
-    <form [formGroup]="orderForm" (ngSubmit)="orderSend(orderedItems)">
+    <form [formGroup]="orderForm" (ngSubmit)="orderSend(orderedItems, getOrderTime())">
     <mat-card-content>
             <mat-form-field appearance="fill">
                 <mat-label >Full name</mat-label>

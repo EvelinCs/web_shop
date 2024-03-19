@@ -1,0 +1,131 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Edit food product</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="editFoodProductForm" (ngSubmit)="editFoodProduct()">
+    <mat-card-content>
+        <mat-form-field appearance="fill">
+            <mat-label >Product Id</mat-label>
+            <input matInput type="text" formControlName="id" required>
+            <mat-error *ngIf="id?.invalid && !id?.pristine">
+                <small *ngIf="id?.errors?.['required']">
+                    ID is required.
+                </small>
+            </mat-error>
+          </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label >Product Name</mat-label>
+                <input matInput type="text" formControlName="name" required>
+                <mat-error *ngIf="name?.invalid && !name?.pristine">
+                    <small *ngIf="name?.errors?.['required']">
+                        Product name is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Species</mat-label>
+                <input matInput type="text" formControlName="species" required>
+                <mat-error *ngIf="species?.invalid && !species?.pristine">
+                    <small *ngIf="species?.errors?.['required']">
+                        Species name is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Price</mat-label>
+                <input matInput type="number" formControlName="price" required>
+                <mat-error *ngIf="price?.invalid && !price?.pristine">
+                    <small *ngIf="price?.errors?.['required']">
+                        Price is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Sale</mat-label>
+                <input matInput type="number" formControlName="sale" required>
+                <mat-error *ngIf="sale?.invalid && !sale?.pristine">
+                    <small *ngIf="sale?.errors?.['required']">
+                        Sale is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Description</mat-label>
+                <input matInput type="text" formControlName="description" required>
+                <mat-error *ngIf="description?.invalid && !description?.pristine">
+                    <small *ngIf="description?.errors?.['required']">
+                        Description is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Brand</mat-label>
+                <input matInput type="text" formControlName="brand" required>
+                <mat-error *ngIf="brand?.invalid && !brand?.pristine">
+                    <small *ngIf="brand?.errors?.['required']">
+                        Brand is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Rating</mat-label>
+                <input matInput type="number" formControlName="rating" required>
+                <mat-error *ngIf="rating?.invalid && !rating?.pristine">
+                    <small *ngIf="rating?.errors?.['required']">
+                        Rating is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Image</mat-label>
+                <input matInput type="text" formControlName="image" required>
+                <mat-error *ngIf="image?.invalid && !image?.pristine">
+                    <small *ngIf="image?.errors?.['required']">
+                        Image is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Available</mat-label>
+                <input matInput type="number" formControlName="available" required>
+                <mat-error *ngIf="available?.invalid && !available?.pristine">
+                    <small *ngIf="available?.errors?.['required']">
+                        Available is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Weight</mat-label>
+                <input matInput type="number" formControlName="weight" required>
+                <mat-error *ngIf="weight?.invalid && !weight?.pristine">
+                    <small *ngIf="weight?.errors?.['required']">
+                        Weight is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label >Lasts till</mat-label>
+                <input matInput type="number" formControlName="lastTil" required>
+                <mat-error *ngIf="lastTil?.invalid && !lastTil?.pristine">
+                    <small *ngIf="lastTil?.errors?.['required']">
+                        Lasts till is required.
+                    </small>
+                </mat-error>
+              </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button [disabled]="!editFoodProductForm.valid" type="submit" mat-raised-button color="primary">Edit Product</button>
+    </mat-card-actions>
+</form>
+</mat-card>

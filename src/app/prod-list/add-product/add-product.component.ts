@@ -37,8 +37,12 @@ export class AddProductComponent {
     this.authService.getAuthenticatedUser().subscribe(user => {
       if (user) {
         // A felhasználó be van jelentkezve, folytathatja az adatbeszúrást
-        this.addProductService.addProduct(this.productAdded);
+        if(this.addProductForm.valid){
+          //ha valid a form
+          this.addProductService.addProduct(this.productAdded);
         this.router.navigateByUrl('/prod-list');
+        }
+        
       } else {
         // A felhasználó nincs bejelentkezve, kezelje ezt az esetet
         console.error('User must sign in to add data');

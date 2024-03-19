@@ -17,6 +17,8 @@ import { FoodProductListComponent } from './food-product-list/food-product-list.
 import { AddFoodProductComponent } from './food-product-list/add-food-product/add-food-product.component';
 import { OrderComponent } from './order/order.component';
 import { SuccessfulOrderComponent } from './successful-order/successful-order.component';
+import { EditProductComponent } from './prod-list/edit-product/edit-product/edit-product.component';
+import { EditFoodProductComponent } from './food-product-list/edit-food-product/edit-food-product.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -35,6 +37,9 @@ const routes: Routes = [
   {path: "order", component: OrderComponent},
   {path: "successfulOrder", component: SuccessfulOrderComponent},
   {path: "prod-list", component: ProdListComponent},
+  {path: "edit-product/:id", component: EditProductComponent},
+  {path: "edit-food-product/:id", component: EditFoodProductComponent},
+  {path: "edit-product/:id", component: EditProductComponent},
   {path: "add-product", component: AddProductComponent},
   {path: "food-prod-list", component: FoodProductListComponent},
   {path: "add-food-product", component: AddFoodProductComponent},

@@ -3,6 +3,7 @@ import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -42,18 +43,31 @@ export class AuthService {
     });
   }
 
-  register(email:string, password: string, confirmPassword: string){
+  register(userEmail:string, password: string, confirmPassword: string, userName: string, userAddress: string, userPhone: string){
     if( password !== confirmPassword){
       return;
     }
 
     this.auth = getAuth();
-    createUserWithEmailAndPassword(this.auth, email, password)
+    createUserWithEmailAndPassword(this.auth, userEmail, password)
     .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
+    // Successful registration - Signed in 
+    let user = userCredential.user;
+    let userId = user.uid;
 
-    this.router.navigateByUrl('/login'); 
+    let fireStore = getFirestore();
+    setDoc(doc(fireStore, 'Users', user.uid), {
+      userId,
+      userName,
+      userEmail,
+      userAddress,
+      userPhone
+    }).then(() => {
+      this.router.navigateByUrl('/home');
+    })
+    .catch((error) => {
+      console.error("User datas couldn't be saved ", error);
+    });
     
   })
   .catch((error) => {

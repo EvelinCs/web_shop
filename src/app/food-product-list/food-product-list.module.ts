@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddFoodProductComponent } from './add-food-product/add-food-product.component';
 import { AddFoodProductModule } from './add-food-product/add-food-product.module';
 import { ConfirmDeleteDialogModule } from '../confirm-delete-dialog/confirm-delete-dialog.module';
+import { EditFoodProductModule } from './edit-food-product/edit-food-product.module';
 
 
 
@@ -22,7 +23,8 @@ import { ConfirmDeleteDialogModule } from '../confirm-delete-dialog/confirm-dele
     MatIconModule,
     MatButtonModule,
     AddFoodProductModule,
-    ConfirmDeleteDialogModule
+    ConfirmDeleteDialogModule,
+    EditFoodProductModule
   ], 
   exports: 
   [FoodProductListComponent]

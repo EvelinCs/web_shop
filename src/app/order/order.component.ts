@@ -35,7 +35,9 @@ export class OrderComponent {
     this.countPrice();
   }
 
-
+  getOrderTime(): Date {
+    return new Date();
+  }
 
   countPrice(){
     this.totalPrice = 0;
@@ -46,12 +48,12 @@ export class OrderComponent {
 
   }
 
-  orderSend(items: OrderedItem[] ){
+  orderSend(items: OrderedItem[], orderTime: Date){
       let user = new User("id", this.userEmail.value, this.userName.value, this.userAddress.value, this.userPhone.value);
       /** TODO
-       * ha sikeres akkor kiüríti a kosarat + átirányít
-       * lehet kell successfulorderservice? */
-      let order = new Order(items, this.totalPrice, user);
+       * adatbázishoz adni */
+
+      let order = new Order(items, this.totalPrice, user, orderTime);
 
       this.successfulOrderService.order(order);
 
