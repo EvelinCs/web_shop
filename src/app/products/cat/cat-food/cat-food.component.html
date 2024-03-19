@@ -26,7 +26,7 @@
     </mat-card-content>
     <mat-card-actions>
       <div><a mat-raised-button color="primary" class="btn" [routerLink]="['/cat-food', element.id]">View details</a></div>
-      <button mat-raised-button color="primary" class="btn" (click)="addToCart(element);">Add to cart</button>
+      <button mat-raised-button color="primary" class="btn" [disabled]="element.available === 0" (click)="addToCart(element);">Add to cart</button>
     </mat-card-actions>
   </mat-card>
 </div>

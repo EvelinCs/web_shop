@@ -22,6 +22,8 @@ import { ProdListModule } from './prod-list/prod-list.module';
 import { FoodDetailModule } from './products/food-details/food-detail.module';
 import { OtherProductDetailModule } from './products/other-product-details/other-product-detail.module';
 import { FoodProductListModule } from './food-product-list/food-product-list.module';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { FoodProductListModule } from './food-product-list/food-product-list.mod
     FoodDetailModule,
     OtherProductDetailModule,
     FoodProductListModule,
+    ProfileModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

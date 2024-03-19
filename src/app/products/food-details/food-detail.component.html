@@ -24,7 +24,7 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button class="btn" type="button" color="primary" (click)="addToCart(foodProduct); ">Add to cart</button>
+      <button mat-raised-button [disabled]="foodProduct.available === 0" class="btn" type="button" color="primary" (click)="addToCart(foodProduct); ">Add to cart</button>
       
     </mat-card-actions>
   </mat-card>

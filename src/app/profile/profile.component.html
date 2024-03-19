@@ -1,68 +1,8 @@
-<mat-card *ngIf="orderedItems?.length === 0">
+<mat-card>
     <mat-card-header>
-        <mat-card-title>You don't have orders</mat-card-title>
+        <mat-card-title>Your details</mat-card-title>
     </mat-card-header>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" class="btn" type="button" [routerLink]="['/home']">Shop now</button>
-    </mat-card-actions>
-</mat-card>
-
-<table mat-table [dataSource]="orderedItems" *ngIf="orderedItems.length > 0">
-  
-    <!-- Image Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element" class="row"> <img [src]="element.image"/> </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element"> {{element.price | currency: 'GBP'}} </td>
-    </ng-container>
-
-    <!-- Quantity Column -->
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef> Quantity </th>
-        <td mat-cell *matCellDef="let element"> 
-            
-            <span class="quantity">
-                {{element.quantity}} 
-            </span>
-            
-        </td>
-      </ng-container>
-
-    
-
-    <!-- Subtotal Column -->
-    <ng-container matColumnDef="subtotal">
-        <th mat-header-cell *matHeaderCellDef> Subtotal </th>
-        <td mat-cell *matCellDef="let element"> 
-            {{(element.quantity * element.price) | currency: 'GBP'}}
-        </td>
-    </ng-container>
-  
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-  <div *ngIf="orderedItems?.length > 0" class="totalPrice">
-    Total price: {{totalPrice | currency: 'GBP'}}
-  </div>
-
-  <mat-card>
-    <mat-card-header>
-        <mat-card-title>Please provide your details</mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="orderForm" (ngSubmit)="orderSend(orderedItems, getOrderTime())">
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
     <mat-card-content>
             <mat-form-field appearance="fill">
                 <mat-label >Full name</mat-label>
@@ -119,10 +59,9 @@
 
     </mat-card-content>
     <mat-card-actions>
-        <button [disabled]="!orderForm.valid || orderedItems.length === 0" type="submit" mat-raised-button color="primary">Order</button>
+        <button [disabled]="!profileForm.valid" type="submit" mat-raised-button color="primary">Save profile</button>
     </mat-card-actions>
 </form>
 </mat-card>
 
   
-

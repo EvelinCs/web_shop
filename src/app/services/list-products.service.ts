@@ -79,6 +79,7 @@ export class ListProductsService {
       map(action => {
         let data = action.payload.data() as FoodProduct;
         let id = action.payload.id;
+        console.log(data.name);
         return { id, ...data };
       })
     );

@@ -1,0 +1,80 @@
+mat-card {
+    position: relative;
+    width: 70%;
+    margin: auto;
+    top: 15%;
+    padding: 20px;
+    align-items: center;
+}
+
+form {
+    width: 100%;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+mat-form-field {
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+
+}
+
+td:first-child{
+    width: 20%;
+}
+
+img {
+    height: 90%;
+    width: 90%;   
+}
+
+
+.totalPrice{
+    position: relative;
+    left: 85%;
+}
+
+//mobile view
+@media only screen and (max-width: 600px) {
+    mat-card {
+        width: 100%;
+        top: 20%;
+        padding: 10px;
+    }
+
+    table {
+        width: 1vw;
+    }
+
+
+    .mat-mdc-table .mdc-data-table__row{
+        td{
+            display: block;
+            width: 20rem;
+            height: 3rem;
+            text-align: center;
+
+            img {
+                width: 10rem;
+                height: 10rem;
+            }
+        }
+        td:first-child{
+            height: 10rem !important;
+
+        }
+    }
+
+    .totalPrice {
+        left: 40%;
+        padding-top: 10px;
+    }
+} 

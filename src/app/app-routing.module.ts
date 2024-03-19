@@ -19,6 +19,7 @@ import { OrderComponent } from './order/order.component';
 import { SuccessfulOrderComponent } from './successful-order/successful-order.component';
 import { EditProductComponent } from './prod-list/edit-product/edit-product/edit-product.component';
 import { EditFoodProductComponent } from './food-product-list/edit-food-product/edit-food-product.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: "add-product", component: AddProductComponent},
   {path: "food-prod-list", component: FoodProductListComponent},
   {path: "add-food-product", component: AddFoodProductComponent},
+  {path: "profile", component: ProfileComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 
