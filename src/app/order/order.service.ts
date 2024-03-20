@@ -1,42 +1,28 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Order, OrderedItem } from '../shared/models/order';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FoodProduct, Product } from '../shared/models/products';
 import { ListProductsService } from '../services/list-products.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService implements OnInit{
+export class OrderService {
 
   orderedProducts?: OrderedItem[] = [];
-  foodProducts: FoodProduct[];
-  products: Product[];
 
   constructor(private afs: AngularFirestore, private listProductsService: ListProductsService,
     private auth: AngularFireAuth) { }
 
-  ngOnInit(): void {
-    /*this.listProductsService.getFoodProducts().subscribe(data => {
-        this.foodProducts = data;
-      });
-
-      this.listProductsService.getProducts().subscribe(data => {
-        this.products = data;
-      });*/
-  }
-
-  order(products: OrderedItem[]){
-
+  order(products: OrderedItem[]) {
     this.orderedProducts = products;
   }
 
-  saveOrder(order: Order){
+  saveOrder(order: Order) {
     return this.afs.collection('Orders').doc(order.orderId).set(order.toFirestoreObject());
   }
 
-  decreaseProductAvailabe(orderedItems: OrderedItem[]){
+  decreaseProductAvailabe(orderedItems: OrderedItem[]) {
 
     if(orderedItems.length > 0){
       this.auth.user.subscribe(user => {
@@ -45,11 +31,9 @@ export class OrderService implements OnInit{
             if(orderedItem.available - orderedItem.quantity >= 0){
               orderedItem.available -= orderedItem.quantity;
 
-              // Ellenőrizze, hogy a dokumentum létezik-e
-            const productDocRef = this.afs.collection('Product').doc(orderedItem.id);
+            let productDocRef = this.afs.collection('Product').doc(orderedItem.id);
             productDocRef.get().toPromise().then(docSnapshot => {
               if (docSnapshot.exists) {
-                // Ha a dokumentum létezik, akkor frissítse
                 productDocRef.update({
                   available: orderedItem.available
                 }).catch(error => {
@@ -61,10 +45,9 @@ export class OrderService implements OnInit{
             });
 
 
-            const foodProductDocRef = this.afs.collection('FoodProduct').doc(orderedItem.id);
+            let foodProductDocRef = this.afs.collection('FoodProduct').doc(orderedItem.id);
             foodProductDocRef.get().toPromise().then(docSnapshot => {
               if (docSnapshot.exists) {
-                // Ha a dokumentum létezik, akkor frissítse
                 foodProductDocRef.update({
                   available: orderedItem.available
                 }).catch(error => {
@@ -76,6 +59,8 @@ export class OrderService implements OnInit{
             });
             }
           });
+        } else {
+          console.error("user must be logged in to order");
         }
       });
     }

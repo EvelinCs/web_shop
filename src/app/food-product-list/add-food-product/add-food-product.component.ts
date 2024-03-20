@@ -23,7 +23,7 @@ export class AddFoodProductComponent {
     sale: new FormControl(0, [Validators.required]), 
     description: new FormControl('', [Validators.required]), 
     brand: new FormControl('', [Validators.required]), 
-    rating: new FormControl([0], [Validators.required]), 
+    rating: new FormControl('0', [Validators.required]), 
     image: new FormControl('', [Validators.required]), 
     available: new FormControl('', [Validators.required]), 
     weight: new FormControl('', [Validators.required]), 
@@ -39,19 +39,24 @@ export class AddFoodProductComponent {
 
     this.authService.getAuthenticatedUser().subscribe(user => {
       if (user) {
-        // A felhasználó be van jelentkezve, folytathatja az adatbeszúrást
 
         if(this.addProductForm.valid){
+
+          let ratings = this.foodProductAdded.rating.toString();
+
+          if (ratings && ratings.includes(',')) {
+            this.foodProductAdded.rating = ratings.split(',').map(elem => parseInt(elem.trim(), 10));
+          } else {
+            this.foodProductAdded.rating = [parseInt(ratings, 10)];
+          }
+
           this.addFoodProductService.addFoodProduct(this.foodProductAdded);
           this.router.navigateByUrl('/food-prod-list');
         }
-        
       } else {
-        // A felhasználó nincs bejelentkezve, kezelje ezt az esetet
         console.error('User must sign in to add data');
       }
     });
-
   }
 
 

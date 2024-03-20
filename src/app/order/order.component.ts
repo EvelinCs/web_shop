@@ -81,18 +81,23 @@ export class OrderComponent implements OnInit{
   orderSend(items: OrderedItem[], orderTime: Date) {
 
     if(this.orderForm.valid && items.length > 0) {
-      let id = this.afs.createId();
-      let order = new Order(id, items, this.totalPrice, this.currentUser, orderTime);
-
-      this.orderService.saveOrder(order);
-      this.successfulOrderService.order(order);
-      
-      this.orderService.decreaseProductAvailabe(order.orderedItems);
-
-      this.cartService.cartItems = [];
-      this.cartItemsQuantityService.cartItems_quantity = 0;
-      this.router.navigateByUrl('/successfulOrder');
-      
+      this.afAuth.user.subscribe(user => {
+        if(user){
+          let id = this.afs.createId();
+          let order = new Order(id, items, this.totalPrice, this.currentUser, orderTime);
+    
+          this.orderService.saveOrder(order);
+          this.successfulOrderService.order(order);
+          
+          this.orderService.decreaseProductAvailabe(order.orderedItems);
+    
+          this.cartService.cartItems = [];
+          this.cartItemsQuantityService.cartItems_quantity = 0;
+          this.router.navigateByUrl('/successfulOrder');
+        } else {
+          console.error("user must be logged in to order");
+        }
+      });
     }
   }
 

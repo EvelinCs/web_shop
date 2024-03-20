@@ -4,9 +4,9 @@ import { CartService } from 'src/app/cart/cart.service';
 import { AuthService } from 'src/app/services/auth-service.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product } from 'src/app/shared/models/products';
-
-import {food} from'../../../shared/models/temp_data';
 import { ListProductsService } from 'src/app/services/list-products.service';
+import { StarRatingService } from '../../shared/star-rating/star-rating.service';
+
 
 @Component({
   selector: 'app-dog-food',
@@ -16,13 +16,15 @@ import { ListProductsService } from 'src/app/services/list-products.service';
 export class DogFoodComponent implements OnInit {
 
   dogFoodProducts?: FoodProduct[] = [];
+  currentUserId?: string;
   
 
   constructor(private cartService: CartService, private router: Router, private auth: AuthService,
-    private listProductsService: ListProductsService){}
+    private listProductsService: ListProductsService, private starRatingService: StarRatingService){}
 
   ngOnInit(): void {
     this.getDogFood();
+    this.currentUserId = this.auth.currentUserId;
   }
 
   getDogFood(){
@@ -38,7 +40,6 @@ export class DogFoodComponent implements OnInit {
         1, cartElement.price, cartElement.available); 
   
       
-
       this.cartService.addToCart(cartItem);
       this.router.navigateByUrl('/cart'); 
 
@@ -49,13 +50,24 @@ export class DogFoodComponent implements OnInit {
 
 
   onRatingAdded(productId: string, newRating: number) {
-    let product = this.dogFoodProducts.find(p => p.id === productId);
-    if (product) {
-        //TODO
 
-      // Itt frissítheti az adatbázist az új értékelésekkel.
-
-      
-    }
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+        if (!this.currentUserId) {
+          console.error('No userID');
+          return;
+        }
+        let product = this.dogFoodProducts.find(p => p.id === productId);
+        if (product && newRating >= 1 && newRating <= 5) {   
+          
+          this.starRatingService.addRating(this.currentUserId, productId, newRating, product.name);
+          this.starRatingService.updateFoodProductRating(productId, newRating);
+        }
+      } else {
+        console.error("user must be logged in to add rating");
+      }
+    });    
   }
+
 }

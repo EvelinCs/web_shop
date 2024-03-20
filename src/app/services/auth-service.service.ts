@@ -11,6 +11,7 @@ import { doc, getFirestore, setDoc } from 'firebase/firestore';
 export class AuthService {
 
   userLoggedIn: boolean;
+  currentUserId: string;
 
   constructor(private auth: Auth, private router: Router, private afAuth: AngularFireAuth) {
         this.userLoggedIn = false;
@@ -18,6 +19,7 @@ export class AuthService {
         onAuthStateChanged(this.auth, (user) => {    
             if (user) {
                 this.userLoggedIn = true;
+                this.currentUserId = user.uid;
             } else {
                 this.userLoggedIn = false;
             }
@@ -26,6 +28,17 @@ export class AuthService {
 
    getAuthenticatedUser() {
     return this.afAuth.authState;
+  }
+
+  getCurrentUserId() {
+    return this.afAuth.currentUser.then(user => {
+      if (user) {
+        return user.uid; 
+      } else {
+        // A felhasználó nincs bejelentkezve
+        return null;
+      }
+    });
   }
 
 

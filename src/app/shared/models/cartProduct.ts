@@ -7,6 +7,7 @@ export class CartProduct {
     quantity: number;
     subtotal: number;
     available: number;
+    //lastTil: number;
 
     constructor(id: string, name: string, price: number, image: string, quantity: number, 
         subtotal: number, available: number){
@@ -17,6 +18,8 @@ export class CartProduct {
             this.quantity = quantity;
             this.subtotal = subtotal;
             this.available = available;
+            //this.lastTil = lastTil;
+            
         }
 
 }

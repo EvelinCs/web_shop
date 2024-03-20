@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product } from 'src/app/shared/models/products';
+import { StarRatingService } from '../../shared/star-rating/star-rating.service';
 
 
 @Component({
@@ -15,12 +16,14 @@ import { FoodProduct, Product } from 'src/app/shared/models/products';
 export class CatOtherProductComponent implements OnInit {
 
   catProducts?: Product[] = [];
+  currentUserId?: string;
 
   constructor(private cartService: CartService, private router: Router, private auth: AuthService,
-    private listProductsService: ListProductsService){}
+    private listProductsService: ListProductsService, private starRatingService: StarRatingService){}
 
     ngOnInit(): void {
       this.getCatPruducts();
+      this.currentUserId = this.auth.currentUserId;
     }
   
     getCatPruducts(){
@@ -43,14 +46,24 @@ export class CatOtherProductComponent implements OnInit {
   }
 
   onRatingAdded(productId: string, newRating: number) {
-    let product = this.catProducts.find(p => p.id === productId);
-    if (product) {
-        //TODO
 
-      // Itt frissítheti az adatbázist az új értékelésekkel.
-
-      
-    }
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+        if (!this.currentUserId) {
+          console.error('No userID');
+          return;
+        }
+        let product = this.catProducts.find(p => p.id === productId);
+        if (product && newRating >= 1 && newRating <= 5) {   
+          
+          this.starRatingService.addRating(this.currentUserId, productId, newRating, product.name);
+          this.starRatingService.updateProductRating(productId, newRating);
+        }
+      } else {
+        console.error("user must be logged in to add rating");
+      }
+    });    
   }
 
 }

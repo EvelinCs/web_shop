@@ -6,13 +6,16 @@ export class Order {
     totalPrice: number;
     user: User;
     orderDate: Date;
+    //lastTil: number;
     
-    constructor(id: string, orderedItems: OrderedItem[], totalPrice: number, user: User, orderDate: Date){
+    constructor(id: string, orderedItems: OrderedItem[], totalPrice: number, user: User, orderDate: Date,
+      ){
         this.orderId = id;
         this.orderedItems = orderedItems;  
         this.totalPrice = totalPrice;
         this.user = user;
         this.orderDate = orderDate;
+        //this.lastTil = lastTil;
     }
 
     toFirestoreObject(): object {

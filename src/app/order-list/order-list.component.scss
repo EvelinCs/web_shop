@@ -1,11 +1,3 @@
-mat-card {
-    position: relative;
-    width: 50%;
-    margin: auto auto 100px auto;
-    top: 15%;
-    padding: 20px;
-    align-items: center;
-}
 
 button {
     width: 40px;
@@ -17,8 +9,8 @@ td:first-child{
 }
 
 img {
-    max-height: 150px;
-    width: auto;   
+    height: 90%;
+    width: 90%;   
 }
 
 .btn {
@@ -45,23 +37,20 @@ img {
 
 
     .mat-mdc-table .mdc-data-table__row{
-        td{
+        td {
             display: block;
             width: 20rem;
             height: 3rem;
             text-align: center;
 
             img {
-                width: auto;
-                height: 15em;
-                max-height: 15em !important;
-                max-width: 100% !important;
+                width: 10rem;
+                height: 10rem;
             }
         }
+        td:first-child{
+            height: 10rem !important;
+        }
     }
-
-    table[mat-table] tr td:nth-child(7) {
-        height: 15em !important;
-      }
 
 } 

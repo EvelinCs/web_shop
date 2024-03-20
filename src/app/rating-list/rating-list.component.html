@@ -1,0 +1,32 @@
+<h1>Ratings list</h1>
+
+<table mat-table [dataSource]="ratingList" *ngIf="ratingList.length > 0">
+
+  <!-- UserID Column -->
+  <ng-container matColumnDef="userId">
+    <th mat-header-cell *matHeaderCellDef> User ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+  </ng-container>
+
+  <!-- productID Column -->
+  <ng-container matColumnDef="productId">
+    <th mat-header-cell *matHeaderCellDef> Product ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.productId}} </td>
+  </ng-container>
+
+  <!-- product name Column -->
+  <ng-container matColumnDef="productName">
+    <th mat-header-cell *matHeaderCellDef> Product name </th>
+    <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+  </ng-container>
+
+  <!-- rating Column -->
+  <ng-container matColumnDef="rating">
+    <th mat-header-cell *matHeaderCellDef> Rating </th>
+    <td mat-cell *matCellDef="let element"> 5 / {{element.rating}} </td>
+  </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

@@ -16,9 +16,10 @@ td:first-child{
     width: 20%;
 }
 
+
 img {
-    height: 90%;
-    width: 90%;   
+    max-height: 200px;
+    width: auto;   
 }
 
 .btn {
@@ -43,22 +44,22 @@ img {
         width: 1vw;
     }
 
-
     .mat-mdc-table .mdc-data-table__row{
         td {
             display: block;
             width: 20rem;
-            height: 3rem;
+            height: 3em;
             text-align: center;
 
             img {
-                width: 10rem;
-                height: 10rem;
+                width: auto;
+                height: 15em;
+                max-height: 15em !important;
             }
         }
-        td:first-child{
-            height: 10rem !important;
-        }
     }
+    table[mat-table] tr td:nth-child(7) {
+        height: 15em !important;
+      }
 
 } 

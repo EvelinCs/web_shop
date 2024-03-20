@@ -23,7 +23,7 @@ export class AddProductComponent {
     sale: new FormControl(0, [Validators.required]), 
     description: new FormControl('', [Validators.required]), 
     brand: new FormControl('', [Validators.required]), 
-    rating: new FormControl([0], [Validators.required]), 
+    rating: new FormControl('0', [Validators.required]), 
     image: new FormControl('', [Validators.required]), 
     available: new FormControl('', [Validators.required]), 
   });
@@ -36,15 +36,21 @@ export class AddProductComponent {
 
     this.authService.getAuthenticatedUser().subscribe(user => {
       if (user) {
-        // A felhasználó be van jelentkezve, folytathatja az adatbeszúrást
         if(this.addProductForm.valid){
-          //ha valid a form
+
+          let ratings = this.productAdded.rating.toString();
+
+          if (ratings && ratings.includes(',')) {
+            this.productAdded.rating = ratings.split(',').map(elem => parseInt(elem.trim(), 10));
+          } else {
+            this.productAdded.rating = [parseInt(ratings, 10)];
+          }
+
           this.addProductService.addProduct(this.productAdded);
         this.router.navigateByUrl('/prod-list');
         }
         
       } else {
-        // A felhasználó nincs bejelentkezve, kezelje ezt az esetet
         console.error('User must sign in to add data');
       }
     });

@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product} from 'src/app/shared/models/products';
-import { food } from 'src/app/shared/models/temp_data';
+import { StarRatingService } from '../shared/star-rating/star-rating.service';
 
 @Component({
   selector: 'app-food-detail',
@@ -15,12 +15,14 @@ import { food } from 'src/app/shared/models/temp_data';
 export class FoodDetailComponent {
 
   foodProduct: FoodProduct | undefined;
+  currentUserId?: string;
 
   constructor(private route: ActivatedRoute, private cartService: CartService, private router: Router, 
-    private auth: AuthService, private listProductsService: ListProductsService) { }
+    private auth: AuthService, private listProductsService: ListProductsService, private starRatingService: StarRatingService) { }
 
   ngOnInit() {
     this.getFood();
+    this.currentUserId = this.auth.currentUserId;
   }
 
   getFood(){
@@ -46,15 +48,24 @@ export class FoodDetailComponent {
   }
 
   onRatingAdded(productId: string, newRating: number) {
-    let product = food.find(p => p.id === productId);     //itt a food-ot lecserélni!!
-    if (product) {
-        //TODO
 
-      // Itt frissítheti az adatbázist az új értékelésekkel.
-      //a new rating igazából már hozzá van adva a rating tömbhöz
-
-      
-    }
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+        if (!this.currentUserId) {
+          console.error('No userID');
+          return;
+        }
+        
+        if ( newRating >= 1 && newRating <= 5) {  
+          
+          this.starRatingService.addRating(this.currentUserId, productId, newRating, this.foodProduct.name);
+          this.starRatingService.updateFoodProductRating(productId, newRating);
+        }
+      } else {
+        console.error("user must be logged in to add rating");
+      }
+    });    
   }
 
 }

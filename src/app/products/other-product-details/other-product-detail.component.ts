@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth-service.service';
 import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product } from 'src/app/shared/models/products';
-import { product } from 'src/app/shared/models/temp_data';
+import { StarRatingService } from '../shared/star-rating/star-rating.service';
 
 @Component({
   selector: 'app-other-product-detail',
@@ -15,12 +15,14 @@ import { product } from 'src/app/shared/models/temp_data';
 export class OtherProductDetailComponent {
 
   otherProduct: Product | undefined;
+  currentUserId?: string;
 
   constructor(private route: ActivatedRoute, private cartService: CartService, private router: Router, 
-    private auth: AuthService, private listProductsService: ListProductsService) { }
+    private auth: AuthService, private listProductsService: ListProductsService, private starRatingService: StarRatingService) { }
 
   ngOnInit() {
     this.getProduct();
+    this.currentUserId = this.auth.currentUserId;
   }
 
   getProduct(){
@@ -48,15 +50,24 @@ export class OtherProductDetailComponent {
   }
 
   onRatingAdded(productId: string, newRating: number) {
-    let productRated = product.find(p => p.id === productId);     //itt a product-ot lecserélni!!
-    if (productRated) {
-        //TODO
 
-      // Itt frissítheti az adatbázist az új értékelésekkel.
-      //a new rating igazából már hozzá van adva a rating tömbhöz
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+        if (!this.currentUserId) {
+          console.error('No userID');
+          return;
+        }
 
-      
-    }
+        if ( newRating >= 1 && newRating <= 5) {  
+          
+          this.starRatingService.addRating(this.currentUserId, productId, newRating, this.otherProduct.name);
+          this.starRatingService.updateProductRating(productId, newRating);
+        }
+      } else {
+        console.error("user must be logged in to add rating");
+      }
+    });    
   }
 
 

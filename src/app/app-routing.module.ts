@@ -20,6 +20,8 @@ import { SuccessfulOrderComponent } from './successful-order/successful-order.co
 import { EditProductComponent } from './prod-list/edit-product/edit-product/edit-product.component';
 import { EditFoodProductComponent } from './food-product-list/edit-food-product/edit-food-product.component';
 import { ProfileComponent } from './profile/profile.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { RatingListComponent } from './rating-list/rating-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -37,6 +39,7 @@ const routes: Routes = [
   {path: "cart", component: CartComponent},
   {path: "order", component: OrderComponent},
   {path: "successfulOrder", component: SuccessfulOrderComponent},
+  {path: "profile", component: ProfileComponent},
   {path: "prod-list", component: ProdListComponent},
   {path: "edit-product/:id", component: EditProductComponent},
   {path: "edit-food-product/:id", component: EditFoodProductComponent},
@@ -44,7 +47,8 @@ const routes: Routes = [
   {path: "add-product", component: AddProductComponent},
   {path: "food-prod-list", component: FoodProductListComponent},
   {path: "add-food-product", component: AddFoodProductComponent},
-  {path: "profile", component: ProfileComponent},
+  {path: "order-list", component: OrderListComponent},
+  {path: "rating-list", component: RatingListComponent},
   {path: "**", component: PageNotFoundComponent}
 ];
 
