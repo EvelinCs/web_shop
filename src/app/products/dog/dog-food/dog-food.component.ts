@@ -35,7 +35,7 @@ export class DogFoodComponent implements OnInit {
 
     if(this.auth.userLoggedIn && cartElement.available > 0) {
       let cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
-        1, cartElement.price, ""); 
+        1, cartElement.price, cartElement.available); 
   
       
 

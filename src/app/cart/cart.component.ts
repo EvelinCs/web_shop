@@ -4,8 +4,7 @@ import { CartItemsQuantityService } from '../services/cart-items-quantity.servic
 import { CartProduct } from '../shared/models/cartProduct';
 import { CartService } from './cart.service';
 import { OrderService } from '../order/order.service';
-import { AuthService } from '../services/auth-service.service';
-import { Order, OrderedItem } from '../shared/models/order';
+import { OrderedItem } from '../shared/models/order';
 
 
 @Component({
@@ -37,7 +36,7 @@ export class CartComponent implements OnInit{
     } else {
       let orders: OrderedItem[] = [];
       for(let item of cartItems){
-        let order = new OrderedItem(item.id, item.name, item.price, item.image, item.quantity, item.subtotal);
+        let order = new OrderedItem(item.id, item.name, item.price, item.image, item.quantity, item.subtotal, item.available);
         orders.push(order);
       }
       this.orderService.order(orders);
@@ -68,10 +67,12 @@ export class CartComponent implements OnInit{
   }
 
   incrementItem(cartItem: CartProduct) {
-
-    cartItem.quantity++;
-    this.cartQuantityService.cartItems_quantity = this.countCartItems();
-    this.countPrice();
+    if(cartItem.available - cartItem.quantity >= 0){
+      cartItem.quantity++;
+      this.cartQuantityService.cartItems_quantity = this.countCartItems();
+      this.countPrice();
+    }
+    
   }
 
   decrementItem(cartItem: CartProduct) {

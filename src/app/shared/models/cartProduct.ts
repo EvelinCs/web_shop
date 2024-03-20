@@ -6,17 +6,17 @@ export class CartProduct {
     image: string;
     quantity: number;
     subtotal: number;
-    deleteButton: string;
+    available: number;
 
     constructor(id: string, name: string, price: number, image: string, quantity: number, 
-        subtotal: number, deleteButton: string){
+        subtotal: number, available: number){
             this.id = id;
             this.name = name;
             this.price = price;
             this.image = image;
             this.quantity = quantity;
             this.subtotal = subtotal;
-            this.deleteButton = deleteButton;
+            this.available = available;
         }
 
 }

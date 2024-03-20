@@ -37,70 +37,48 @@ export class OrderService implements OnInit{
   }
 
   decreaseProductAvailabe(orderedItems: OrderedItem[]){
-    let foods: FoodProduct[] = [];
-    let products = [];
+
     if(orderedItems.length > 0){
-      this.listProductsService.getFoodProducts().subscribe(data => {
-        this.foodProducts = data;
+      this.auth.user.subscribe(user => {
+        if(user){
+          orderedItems.forEach(orderedItem => {
+            if(orderedItem.available - orderedItem.quantity >= 0){
+              orderedItem.available -= orderedItem.quantity;
 
-        orderedItems.forEach(orderedItem => {
-          if(this.foodProducts){
-            const foodProductIndex = this.foodProducts.findIndex(foodProduct => foodProduct.id === orderedItem.id);
-            if (foodProductIndex !== -1){
-              foods[foodProductIndex] = this.foodProducts[foodProductIndex];
-              foods[foodProductIndex].available -= orderedItem.quantity;
+              // Ellenőrizze, hogy a dokumentum létezik-e
+            const productDocRef = this.afs.collection('Product').doc(orderedItem.id);
+            productDocRef.get().toPromise().then(docSnapshot => {
+              if (docSnapshot.exists) {
+                // Ha a dokumentum létezik, akkor frissítse
+                productDocRef.update({
+                  available: orderedItem.available
+                }).catch(error => {
+                  console.error("an error occured during the order", error);
+                });
+              } 
+            }).catch(error => {
+              console.error("an error occured during the order", error);
+            });
+
+
+            const foodProductDocRef = this.afs.collection('FoodProduct').doc(orderedItem.id);
+            foodProductDocRef.get().toPromise().then(docSnapshot => {
+              if (docSnapshot.exists) {
+                // Ha a dokumentum létezik, akkor frissítse
+                foodProductDocRef.update({
+                  available: orderedItem.available
+                }).catch(error => {
+                  console.error("an error occured during the order", error);
+                });
+              } 
+            }).catch(error => {
+              console.error("an error occured during the order", error);
+            });
             }
-          }
-        });
-      });
-      console.log(foods[0].available);
-
-      this.listProductsService.getProducts().subscribe(data => {
-        this.products = data;
-      });
-    }
-
-    /*this.auth.user.subscribe(user =>{
-      if(user){
-        if(orderedItems.length > 0){
-          this.listProductsService.getFoodProducts().subscribe(data => {
-            this.foodProducts = data;
-
-            orderedItems.forEach(orderedItem => {
-              if(this.foodProducts){
-                const foodProductIndex = this.foodProducts.findIndex(foodProduct => foodProduct.id === orderedItem.id);
-              if (foodProductIndex !== -1 && (this.foodProducts[foodProductIndex].available - orderedItem.quantity >= 0)) {
-                this.foodProducts[foodProductIndex].available -= orderedItem.quantity;
-                this.afs.collection('FoodProduct').doc(orderedItem.id).update({
-                  available: this.foodProducts[foodProductIndex].available
-                }).catch(error =>{
-                  console.error("an error occured during the order", error)
-                });
-              } 
-              } 
-            });
-          });
-
-          this.listProductsService.getProducts().subscribe(data => {
-            this.products = data;
-
-            orderedItems.forEach(orderedItem => {
-              if(this.products){
-                const productIndex = this.products.findIndex(product => product.id === orderedItem.id);
-              if (productIndex !== -1 && (this.products[productIndex].available - orderedItem.quantity >= 0)) {
-                this.products[productIndex].available -= orderedItem.quantity;
-                this.afs.collection('Product').doc(orderedItem.id).update({
-                  available: this.products[productIndex].available
-                });
-              }
-              } 
-            });
           });
         }
-      } else {
-        console.error("user must be logged in to order");
-      }
-    });*/
+      });
+    }
   }
 
   getOrders() {

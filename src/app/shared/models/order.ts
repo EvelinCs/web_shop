@@ -41,14 +41,16 @@ export class OrderedItem{
     image: string;
     quantity: number;
     subtotal: number;
+    available: number;
 
     constructor(id: string, name: string, price: number, image: string, quantity: number, 
-        subtotal: number ){
+        subtotal: number, available: number ){
             this.id = id;
             this.name = name;
             this.price = price;
             this.image = image;
             this.quantity = quantity;
             this.subtotal = subtotal;
+            this.available = available;
         }
 }
