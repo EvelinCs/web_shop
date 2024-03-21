@@ -26,6 +26,8 @@ import { ProfileModule } from './profile/profile.module';
 import { OrderListModule } from './order-list/order-list.module';
 import { RatingListComponent } from './rating-list/rating-list.component';
 import { RatingListModule } from './rating-list/rating-list.module';
+import { FavouritesComponent } from './favourites/favourites.component';
+import { FavouritesModule } from './favourites/favourites.module';
 
 
 @NgModule({
@@ -51,6 +53,7 @@ import { RatingListModule } from './rating-list/rating-list.module';
     FoodProductListModule,
     ProfileModule,
     OrderListModule,
+    FavouritesModule,
     RatingListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

@@ -6,23 +6,70 @@ import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product} from 'src/app/shared/models/products';
 import { StarRatingService } from '../shared/star-rating/star-rating.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserFavourites } from 'src/app/shared/models/UserFavourites';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-food-detail',
   templateUrl: './food-detail.component.html',
   styleUrls: ['./food-detail.component.scss']
 })
-export class FoodDetailComponent {
+export class FoodDetailComponent implements OnInit {
 
   foodProduct: FoodProduct | undefined;
   currentUserId?: string;
 
+  isFavourite: boolean = false;
+
   constructor(private route: ActivatedRoute, private cartService: CartService, private router: Router, 
-    private auth: AuthService, private listProductsService: ListProductsService, private starRatingService: StarRatingService) { }
+    private auth: AuthService, private listProductsService: ListProductsService, private starRatingService: StarRatingService,
+    private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.getFood();
     this.currentUserId = this.auth.currentUserId;
+
+    this.checkIfFavourite();
+  }
+
+  checkIfFavourite() {
+    this.currentUserId = this.auth.currentUserId;
+    this.afs.collection('FavouriteFoodProducts').doc<UserFavourites>(this.currentUserId).valueChanges().subscribe(doc => {
+      if (doc && doc.favourites && doc.favourites.some(f => f.id === this.foodProduct.id)) {
+        this.isFavourite = true;
+      } else {
+        this.isFavourite = false;
+      }
+    });
+  }
+
+  toggleFavourite(food: FoodProduct) {
+
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+
+        let userFavouritesRef = this.afs.doc<UserFavourites>(`FavouriteFoodProducts/${this.currentUserId}`);
+        userFavouritesRef.valueChanges().pipe(
+        // Csak egyszer kéri le az adatokat, nem iratkozik fel folyamatosan, mert különben végtelen ciklusba esik
+        take(1) 
+        ).subscribe((doc: UserFavourites) => {
+      let favouritesIds = doc ? doc.favourites.map(element => element.id) : [];
+      if (favouritesIds.includes(food.id)) {
+        let updatedFavourites = doc.favourites.filter(element => element.id !== food.id);
+        userFavouritesRef.update({ favourites: updatedFavourites });
+        this.isFavourite = false;
+      } else {
+        let updatedFavourites = [...doc.favourites, food];
+        userFavouritesRef.update({ favourites: updatedFavourites });
+        this.isFavourite = true;
+      }
+    });
+      } else {
+        console.error("user must be logged in to save favourites");
+      }
+    });
   }
 
   getFood(){

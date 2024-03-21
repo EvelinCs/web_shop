@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
@@ -13,7 +14,7 @@ export class AuthService {
   userLoggedIn: boolean;
   currentUserId: string;
 
-  constructor(private auth: Auth, private router: Router, private afAuth: AngularFireAuth) {
+  constructor(private auth: Auth, private router: Router, private afAuth: AngularFireAuth, private afs: AngularFirestore) {
         this.userLoggedIn = false;
 
         onAuthStateChanged(this.auth, (user) => {    
@@ -67,6 +68,14 @@ export class AuthService {
     // Successful registration - Signed in 
     let user = userCredential.user;
     let userId = user.uid;
+
+    this.afs.collection('FavouriteFoodProducts').doc(userId).set({
+      favourites: [] 
+    });
+
+    this.afs.collection('FavouriteProducts').doc(userId).set({
+      favourites: [] 
+    });
 
     let fireStore = getFirestore();
     setDoc(doc(fireStore, 'Users', user.uid), {

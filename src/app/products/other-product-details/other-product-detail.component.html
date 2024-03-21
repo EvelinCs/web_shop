@@ -10,6 +10,7 @@
         <span class="forSalePrice">{{otherProduct.price - (otherProduct.price * (otherProduct.sale / 100)) | currency: 'GBP'}}</span>
     
       </mat-card-subtitle>
+      <mat-icon (click)="toggleFavourite(otherProduct)"> {{ isFavourite ? 'favorite' : 'favorite_border' }}</mat-icon>
     </mat-card-header>
     <div class="img-container">
         <img mat-card-image src="{{otherProduct.image}}" alt="{{otherProduct.name}}">

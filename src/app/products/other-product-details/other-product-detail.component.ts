@@ -6,6 +6,9 @@ import { ListProductsService } from 'src/app/services/list-products.service';
 import { CartProduct } from 'src/app/shared/models/cartProduct';
 import { FoodProduct, Product } from 'src/app/shared/models/products';
 import { StarRatingService } from '../shared/star-rating/star-rating.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserFavouriteProducts } from 'src/app/shared/models/UserFavourites';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-other-product-detail',
@@ -17,12 +20,56 @@ export class OtherProductDetailComponent {
   otherProduct: Product | undefined;
   currentUserId?: string;
 
+  isFavourite: boolean = false;
+
   constructor(private route: ActivatedRoute, private cartService: CartService, private router: Router, 
-    private auth: AuthService, private listProductsService: ListProductsService, private starRatingService: StarRatingService) { }
+    private auth: AuthService, private listProductsService: ListProductsService, private afs: AngularFirestore,
+    private starRatingService: StarRatingService) { }
 
   ngOnInit() {
     this.getProduct();
     this.currentUserId = this.auth.currentUserId;
+
+    this.checkIfFavourite();
+  }
+
+  checkIfFavourite() {
+    this.currentUserId = this.auth.currentUserId;
+    this.afs.collection('FavouriteProducts').doc<UserFavouriteProducts>(this.currentUserId).valueChanges().subscribe(doc => {
+      if (doc && doc.favourites && doc.favourites.some(f => f.id === this.otherProduct.id)) {
+        this.isFavourite = true;
+      } else {
+        this.isFavourite = false;
+      }
+    });
+  }
+
+  toggleFavourite(product: Product) {
+
+    this.auth.getAuthenticatedUser().subscribe(user => {
+      if(user){
+        this.currentUserId = this.auth.currentUserId;
+
+        let userFavouritesRef = this.afs.doc<UserFavouriteProducts>(`FavouriteProducts/${this.currentUserId}`);
+        userFavouritesRef.valueChanges().pipe(
+        // Csak egyszer kéri le az adatokat, nem iratkozik fel folyamatosan, mert különben végtelen ciklusba esik
+        take(1) 
+        ).subscribe((doc: UserFavouriteProducts) => {
+      let favouritesIds = doc ? doc.favourites.map(element => element.id) : [];
+      if (favouritesIds.includes(product.id)) {
+        let updatedFavourites = doc.favourites.filter(element => element.id !== product.id);
+        userFavouritesRef.update({ favourites: updatedFavourites });
+        this.isFavourite = false;
+      } else {
+        let updatedFavourites = [...doc.favourites, product];
+        userFavouritesRef.update({ favourites: updatedFavourites });
+        this.isFavourite = true;
+      }
+    });
+      } else {
+        console.error("user must be logged in to save favourites");
+      }
+    });
   }
 
   getProduct(){
@@ -69,6 +116,4 @@ export class OtherProductDetailComponent {
       }
     });    
   }
-
-
 }

@@ -25,6 +25,7 @@ export class DogFoodComponent implements OnInit {
   ngOnInit(): void {
     this.getDogFood();
     this.currentUserId = this.auth.currentUserId;
+
   }
 
   getDogFood(){
@@ -32,7 +33,7 @@ export class DogFoodComponent implements OnInit {
       this.dogFoodProducts = data;
     });
   }
-
+  
   addToCart(cartElement: Product | FoodProduct){
 
     if(this.auth.userLoggedIn && cartElement.available > 0) {
@@ -48,14 +49,12 @@ export class DogFoodComponent implements OnInit {
     }    
   }
 
-
   onRatingAdded(productId: string, newRating: number) {
 
     this.auth.getAuthenticatedUser().subscribe(user => {
       if(user){
         this.currentUserId = this.auth.currentUserId;
         if (!this.currentUserId) {
-          console.error('No userID');
           return;
         }
         let product = this.dogFoodProducts.find(p => p.id === productId);
@@ -69,5 +68,4 @@ export class DogFoodComponent implements OnInit {
       }
     });    
   }
-
 }

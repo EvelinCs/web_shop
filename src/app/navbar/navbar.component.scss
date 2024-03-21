@@ -35,21 +35,44 @@ mat-toolbar {
     z-index: 10;
 }
 
+:host ::ng-deep .mat-badge-content {
+    right: 2px !important;
+    top: -2px !important;
+}
+
 //mobile view
 @media only screen and (max-width: 600px) {
     button {
-        height: 25px !important;
-        width: 25px !important;
+        padding: 0;        
     }
 
-    .search-bar {
-        display: none;
+    #favourite {
+        right: 5px;
+    }
 
+    #cart {
+        right: 20px;
+    }
+
+    input {
+        width: 90px;
+        left: 0;
+        top: -5px;
     }
 
     .s-btn {
-        color: white!important;
+        color: #673ab7 !important;
         position: relative;
         top: -7px;
+    }
+
+    .search-btn {
+        right: -13px;
+        top: -6px;
+    }
+
+    :host ::ng-deep .mat-badge-content {
+        right: 2px !important;
+        top: -2px !important;
     }
 } 

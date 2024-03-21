@@ -1,0 +1,84 @@
+mat-card {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    top: 15%;
+    padding: 20px;
+    align-items: center;
+}
+
+table {
+    padding-top: 20px;
+    width: 100vw;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+}
+
+td:first-child{
+    width: 20%;
+}
+
+img {
+    height: 15em;
+    width: auto;   
+}
+
+.btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.buttons {
+    position: relative;
+    top: 10%;
+}
+
+.totalPrice{
+    position: relative;
+    left: 85%;
+}
+
+//mobile view
+@media only screen and (max-width: 600px) {
+    mat-card {
+        width: 100%;
+        top: 20%;
+        padding: 10px;
+    }
+
+    table {
+        width: 1vw;
+    }
+
+    img {
+        height: auto !important;
+        width: 15em !important;   
+    }
+
+    .mat-mdc-table .mdc-data-table__row{
+        td{
+            display: block;
+            width: 20rem;
+            height: 3rem;
+            text-align: center;
+
+            img {
+                width: auto !important;
+                height: 15em;
+                max-height: 15em !important;
+            }
+        }
+    }
+
+    table[mat-table] tr td:first-child {
+        height: 15em !important;
+      }
+
+    .totalPrice {
+        left: 40%;
+        padding-top: 10px;
+    }
+} 
