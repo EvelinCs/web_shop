@@ -9,6 +9,10 @@ import { CatFoodModule } from '../products/cat/cat-food/cat-food.module';
 import { DogFoodModule } from '../products/dog/dog-food/dog-food.module';
 import { DogOtherProductModule } from '../products/dog/dog-other-product/dog-other-product.module';
 import { StarRatingModule } from '../products/shared/star-rating/star-rating.module';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -24,7 +28,12 @@ import { StarRatingModule } from '../products/shared/star-rating/star-rating.mod
     CatFoodModule,
     DogFoodModule,
     DogOtherProductModule, 
-    StarRatingModule
+    StarRatingModule,
+
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     HomeComponent

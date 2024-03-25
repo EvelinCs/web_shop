@@ -55,7 +55,8 @@ img {
 
     img {
         height: auto !important;
-        width: 15em !important;   
+        width: 15em !important;  
+        max-width: 80% !important; 
     }
 
     .mat-mdc-table .mdc-data-table__row{

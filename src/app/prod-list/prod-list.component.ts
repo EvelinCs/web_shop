@@ -36,7 +36,6 @@ export class ProdListComponent implements OnInit {
     
       this.authService.getAuthenticatedUser().subscribe(user => {
         if (user) {
-          //user is logged in
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
               //user clicked yes

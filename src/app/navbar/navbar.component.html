@@ -1,11 +1,11 @@
 <mat-toolbar color="primary" class="nav">
     <app-menu></app-menu>
-    <a  mat-flat-button color="primary" [routerLink]="['/home']">My App</a>
+    <a  mat-flat-button color="primary" [routerLink]="['/home']" (click)="deleteSearch()">My App</a>
     <div class="right">
         
         <div class="search-bar-div">
-            <input class="search-bar" type="text" >
-        <button class="search-btn" mat-icon-button><mat-icon class="s-btn">search</mat-icon></button>
+            <input class="search-bar" type="text" #searchedItem (keyup.enter)="onSearch(searchedItem.value)">
+        <button class="search-btn" mat-icon-button (click)="onSearch(searchedItem.value)"><mat-icon class="s-btn">search</mat-icon></button>
         </div>
         
         <button id="favourite" *ngIf="this.authService.userLoggedIn" mat-icon-button [routerLink]="['/favourites']"><mat-icon>favorite</mat-icon></button>
@@ -13,7 +13,7 @@
             <mat-icon>shopping_cart</mat-icon>
             <span class="cdk-visually-hidden">
                 <!--for screen readers-->
-                Example with a home icon with overlaid badge showing the number 0
+                Number of the products placed in your cart {{cartService.cartItems_quantity}}
             </span>
         </button>
         <app-account-menu></app-account-menu>

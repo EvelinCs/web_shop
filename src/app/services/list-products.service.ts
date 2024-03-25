@@ -94,5 +94,42 @@ export class ListProductsService {
     );
   }
 
+  /*searchProducts(searchedTerm: string): Observable<Product[]>{
+    let searchedProduct = this.titleCaseWord(searchedTerm);
+    return this.afs.collection('Product', ref => 
+    ref.orderBy('name').startAt(searchedProduct).endAt(searchedProduct + '\uf8ff')).valueChanges();
+  }
+
+  searchFoodProducts(searchedTerm: string): Observable<FoodProduct[]>{
+    let searchedFoodProduct = this.titleCaseWord(searchedTerm);
+    return this.afs.collection('FoodProduct', ref => 
+    ref.orderBy('name').startAt(searchedFoodProduct).endAt(searchedFoodProduct + '\uf8ff')).valueChanges();
+  }
+
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }*/
+
+
+  searchFoodProducts(searchedTerm: string): Observable<FoodProduct[]>{
+    return this.getFoodProducts().pipe(
+      map(foods => foods.filter(product =>
+        product.name.toLowerCase().includes(searchedTerm.toLowerCase())
+      ))
+    );
+  }
+
+  searchProducts(searchedTerm: string): Observable<Product[]>{
+    return this.getProducts().pipe(
+      map(products => products.filter(product =>
+        product.name.toLowerCase().includes(searchedTerm.toLowerCase())
+      ))
+    );
+  }
+
+
+  
+
 
 }
