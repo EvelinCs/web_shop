@@ -83,8 +83,13 @@ export class FoodDetailComponent implements OnInit {
   addToCart(cartElement: Product | FoodProduct){
 
     if(this.auth.userLoggedIn && cartElement.available > 0) {
-      var cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
-        1, cartElement.price, cartElement.available); 
+      let price = 0;
+      let cartItem = new CartProduct(cartElement.id, cartElement.name, cartElement.price, cartElement.image,
+        1, cartElement.price, cartElement.available);
+      if(cartElement.sale > 0){
+        price = cartElement.price - (cartElement.price * (cartElement.sale / 100));
+        cartItem.price = price;
+      } 
   
       this.cartService.addToCart(cartItem);
       this.router.navigateByUrl('/cart'); 

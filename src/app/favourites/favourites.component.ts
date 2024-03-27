@@ -16,8 +16,8 @@ export class FavouritesComponent implements OnInit {
 
   currentUserId?: string;
 
-  displayedFoodColumns: string[] = ['foodImage', 'foodName', 'foodTotalPrice', 'deleteButton'];
-  displayedProductColumns: string[] = ['productImage', 'productName', 'totalPrice', 'deleteButton'];
+  displayedFoodColumns: string[] = ['foodImage', 'foodName', 'foodTotalPrice', 'jumpToProduct', 'deleteButton'];
+  displayedProductColumns: string[] = ['productImage', 'productName', 'totalPrice', 'jumpToProduct', 'deleteButton'];
 
   constructor(private confirmDeleteDialogService: ConfirmDeleteDialogService, private authService: AuthService,
     private favouritesService: FavouritesService){}

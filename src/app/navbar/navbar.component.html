@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="nav">
     <app-menu></app-menu>
-    <a  mat-flat-button color="primary" [routerLink]="['/home']" (click)="deleteSearch()">My App</a>
+    <a  mat-flat-button color="primary" [routerLink]="['/home']" (click)="deleteSearch()">Pet Shop</a>
     <div class="right">
         
         <div class="search-bar-div">
@@ -17,8 +17,9 @@
             </span>
         </button>
         <app-account-menu></app-account-menu>
-    
-        <button *ngIf="!this.authService.userLoggedIn" mat-flat-button color="primary" [routerLink]="['/login']" class="vcenter">Login</button>
-        <button *ngIf="!this.authService.userLoggedIn" mat-flat-button color="primary" [routerLink]="['/register']" class="vcenter">Register</button>
+
+        <button id="login" *ngIf="!this.authService.userLoggedIn" mat-flat-button color="primary" [routerLink]="['/login']" class="vcenter">Login</button>
+        <button id="register" *ngIf="!this.authService.userLoggedIn" mat-flat-button color="primary" [routerLink]="['/register']" class="vcenter">Register</button>
+
     </div>
 </mat-toolbar>

@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit{
   saveProfile(){
     if(this.currentUserId && this.profileForm.valid){
       let updatedData = this.profileForm.value;
+      updatedData.userEmail = this.currentUser.userEmail;
       this.userService.editUser(this.currentUserId, updatedData).then(() => {
         this.router.navigateByUrl('/home');
       });

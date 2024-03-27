@@ -27,6 +27,15 @@
     <td mat-cell *matCellDef="let element"> {{element.price | currency: 'GBP'}} </td>
   </ng-container>
 
+  <!-- jump to product Column -->
+  <ng-container matColumnDef="jumpToProduct" >
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element" > 
+      <button mat-button *ngIf="element.species === 'dog'" [routerLink]="['/dog-food', element.id]">Jump to product</button>
+      <button mat-button *ngIf="element.species === 'cat'" [routerLink]="['/cat-food', element.id]">Jump to product</button>  
+    </td>
+  </ng-container>
+
 
     <!-- Delete Button Column -->
     <ng-container matColumnDef="deleteButton">
@@ -63,6 +72,15 @@
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let element"> {{element.price | currency: 'GBP'}} </td>
     </ng-container>
+
+    <!-- jump to product Column -->
+  <ng-container matColumnDef="jumpToProduct" >
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element" > 
+      <button mat-button *ngIf="element.species === 'dog'" [routerLink]="['/dog-product', element.id]">Jump to product</button>
+      <button mat-button *ngIf="element.species === 'cat'" [routerLink]="['/cat-product', element.id]">Jump to product</button>  
+    </td>
+  </ng-container>
   
   
       <!-- Delete Button Column -->
