@@ -23,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { RatingListComponent } from './rating-list/rating-list.component';
 import { FavouritesComponent } from './favourites/favourites.component';
+import { SaleComponent } from './sale/sale.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: "full"},
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: "order", component: OrderComponent},
   {path: "successfulOrder", component: SuccessfulOrderComponent},
   {path: "profile", component: ProfileComponent},
+  {path: "sale", component: SaleComponent},
   {path: "favourites", component: FavouritesComponent},
   {path: "prod-list", component: ProdListComponent},
   {path: "edit-product/:id", component: EditProductComponent},

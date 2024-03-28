@@ -1,35 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart/cart.service';
 import { Router } from '@angular/router';
-import { CartService } from 'src/app/cart/cart.service';
-import { AuthService } from 'src/app/services/auth-service.service';
-import { CartProduct } from 'src/app/shared/models/cartProduct';
-import { FoodProduct, Product } from 'src/app/shared/models/products';
-import { ListProductsService } from 'src/app/services/list-products.service';
-import { StarRatingService } from '../../shared/star-rating/star-rating.service';
+import { AuthService } from '../services/auth-service.service';
+import { StarRatingService } from '../products/shared/star-rating/star-rating.service';
+import { FoodProduct, Product } from '../shared/models/products';
+import { SaleService } from './sale.service';
+import { CartProduct } from '../shared/models/cartProduct';
 
 @Component({
-  selector: 'app-cat-food',
-  templateUrl: './cat-food.component.html',
-  styleUrls: ['./cat-food.component.scss']
+  selector: 'app-sale',
+  templateUrl: './sale.component.html',
+  styleUrls: ['./sale.component.scss']
 })
-export class CatFoodComponent implements OnInit {
+export class SaleComponent implements OnInit {
 
-  catFoodProducts?: FoodProduct[] = [];
+  saleProducts : Product[] = [];
+  saleFoodProducts: FoodProduct[] = [];
   currentUserId?: string;
 
   constructor(private cartService: CartService, private router: Router, private auth: AuthService,
-    private listProductsService: ListProductsService, private starRatingService: StarRatingService){}
+     private starRatingService: StarRatingService, private saleService: SaleService){}
 
   ngOnInit(): void {
-    this.getCatFood();
+    this.getOnSale();
     this.currentUserId = this.auth.currentUserId;
   }
 
-  getCatFood(){
-    this.listProductsService.getCatFoodProducts().subscribe(data => {
-      this.catFoodProducts = data;
+  getOnSale(){
+    this.saleService.getFoodProductsOnSale().subscribe(data => {
+      this.saleFoodProducts = data;
+    });
+
+    this.saleService.getProductsOnSale().subscribe(data => {
+      this.saleProducts = data;
     });
   }
+
 
   addToCart(cartElement: Product | FoodProduct){
     if(this.auth.userLoggedIn && cartElement.available > 0) {
@@ -58,10 +64,18 @@ export class CatFoodComponent implements OnInit {
           console.error('No userID');
           return;
         }
-        let product = this.catFoodProducts.find(p => p.id === productId);
+
+        let product = this.saleProducts.find(p => p.id === productId);
         if (product && newRating >= 1 && newRating <= 5) {   
           
           this.starRatingService.addRating(this.currentUserId, productId, newRating, product.name);
+          this.starRatingService.updateProductRating(productId, newRating);
+        }
+
+        let foodProduct = this.saleFoodProducts.find(p => p.id === productId);
+        if (foodProduct && newRating >= 1 && newRating <= 5) {   
+          
+          this.starRatingService.addRating(this.currentUserId, productId, newRating, foodProduct.name);
           this.starRatingService.updateFoodProductRating(productId, newRating);
         }
       } else {

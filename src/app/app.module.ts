@@ -24,16 +24,17 @@ import { OtherProductDetailModule } from './products/other-product-details/other
 import { FoodProductListModule } from './food-product-list/food-product-list.module';
 import { ProfileModule } from './profile/profile.module';
 import { OrderListModule } from './order-list/order-list.module';
-import { RatingListComponent } from './rating-list/rating-list.component';
 import { RatingListModule } from './rating-list/rating-list.module';
-import { FavouritesComponent } from './favourites/favourites.component';
 import { FavouritesModule } from './favourites/favourites.module';
+import { SaleModule } from './sale/sale.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,6 +56,8 @@ import { FavouritesModule } from './favourites/favourites.module';
     OrderListModule,
     FavouritesModule,
     RatingListModule,
+    SaleModule,
+    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

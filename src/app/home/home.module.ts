@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [
     HomeComponent
@@ -33,7 +34,8 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+
   ],
   exports: [
     HomeComponent

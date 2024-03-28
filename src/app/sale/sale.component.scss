@@ -9,11 +9,8 @@ h1 {
 }
 
 mat-card {
-    width: 75%;
-    height: 100vh;
-    margin-top: 5em!important;
-    margin: auto;
-    max-height: auto;
+    width: 24%;
+    height: 35rem;
 }
 
 mat-card-header {
@@ -22,8 +19,12 @@ mat-card-header {
 
 mat-card-title {
     padding-left: 0 !important;
+    font-size: 1.5em;
 }
 
+mat-card-actions {
+    display: block;
+}
 
 .img-container {
     position: relative;
@@ -36,6 +37,7 @@ mat-card-title {
     display: block;
     height: 100%;
     width: auto;
+    max-width: 100%;
     align-self: center;
 }
 
@@ -65,7 +67,7 @@ mat-card-title {
 .forSalePrice{
     padding-left: 10px;
     color: red;
-    font-size: 1.5em;
+    font-size: 2em;
     font-style: italic;
 }
 
@@ -78,29 +80,27 @@ mat-card-title {
     text-align: center;
 }
 
-button {
+p {
+    text-overflow: ellipsis;  // adds ... at the end of paragraph
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3.5em;
+    line-height: 1.6em;
+  }
+
+.btn {
     width: 100%;
 }
 
-mat-icon {
-    cursor: pointer;
+.btn:first-child {
+    margin-bottom: 5px;
 }
 
 //mobile view
 @media only screen and (max-width: 600px) {
     mat-card {
-        width: 100vw;
-        height: auto;
-    }
-
-    img {
-        height: 15em !important;
-        width: auto;
-        align-self: center;
-    }
-
-    mat-icon {
-        width: 50px;
-        margin-right: 5px;
+        width: 100%;
     }
 } 
